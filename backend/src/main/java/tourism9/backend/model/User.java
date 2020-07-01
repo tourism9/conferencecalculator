@@ -4,13 +4,25 @@ import java.util.UUID;
 
 public class User {
 
-    private final UUID id;
-    private final String username;
-    private final String password;
+    private UUID id;
+    private String username;
+    private String password;
 
     public User(UUID id, String username, String password) {
         this.id = id;
         this.username = username;
+        this.password = password;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
         this.password = password;
     }
 
