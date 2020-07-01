@@ -20,6 +20,7 @@ The frontend was created using create-react-app: https://create-react-app.dev/
 3. In the terminal, navigate to backend/src/main/frontend (I know, the parent "backend" folder naming scheme is confusing)
 4. In the terminal, run:
 ```
+npm install
 npm start
 ```
 At this point, you should see a basic webpage with the spinning React logo on it.
