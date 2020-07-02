@@ -20,5 +20,5 @@ public interface UserDao {
 
     int deleteUserByID(UUID id); // DELETE Method
 
-    int updateUserByID(UUID id);
+    int updateUserByID(UUID id, User user);
 }
