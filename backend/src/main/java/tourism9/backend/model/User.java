@@ -1,5 +1,6 @@
 package tourism9.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
 
 public class User {
@@ -8,7 +9,9 @@ public class User {
     private String username;
     private String password;
 
-    public User(UUID id, String username, String password) {
+    public User(@JsonProperty("id") UUID id,
+                @JsonProperty("username") String username,
+                @JsonProperty("password") String password) {
         this.id = id;
         this.username = username;
         this.password = password;

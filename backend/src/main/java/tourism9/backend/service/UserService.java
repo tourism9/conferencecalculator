@@ -3,8 +3,11 @@ package tourism9.backend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import tourism9.backend.dao.UserDao;
 import tourism9.backend.model.User;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -17,7 +20,11 @@ public class UserService {
     }
 
 
-    public int addUser(User user) {
+    public int addUser(@RequestBody User user) {
         return userDao.insertUser(user);
+    }
+
+    public List<User> getAllUsers() {
+        return userDao.selectAllUsers();
     }
 }
