@@ -10,9 +10,7 @@ public class Room {
     private UUID id;
     @NotBlank
     private String name;
-    @NotBlank
     private double length;
-    @NotBlank
     private double width;
 
     public Room(@JsonProperty("id") UUID id,
