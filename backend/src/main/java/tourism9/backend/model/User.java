@@ -1,12 +1,17 @@
 package tourism9.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.validation.constraints.NotBlank;
 import java.util.UUID;
 
 public class User {
 
     private UUID id;
+
+    @NotBlank
     private String username;
+    @NotBlank
     private String password;
 
     public User(@JsonProperty("id") UUID id,
