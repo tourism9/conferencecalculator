@@ -1,11 +1,14 @@
 package tourism9.backend.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import tourism9.backend.model.User;
 import tourism9.backend.service.UserService;
 
 import javax.swing.text.html.Option;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping
-    public void addUser(@RequestBody User user) {
+    public void addUser(@Valid @NonNull @RequestBody User user) {
         userService.addUser(user);
     }
 
@@ -43,8 +46,7 @@ public class UserController {
     }
 
     @PutMapping("{id}")
-    public void updateUser(@PathVariable("id") UUID id, @RequestBody User user) {
+    public void updateUser(@PathVariable("id") UUID id, @Valid @NonNull @RequestBody User user) {
         userService.updateUser(id, user);
     }
-
 }
