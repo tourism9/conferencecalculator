@@ -79,7 +79,7 @@ function App(){
               <Form.Label>Length</Form.Label>
               <Form.Control type="number" step="1" onChange={(e) =>setNewRoomData({
                 name:newRoomData.name,
-                width:e.target.value,
+                width:newRoomData.width,
                 length:e.target.value,
                 maxCapacity:newRoomData.maxCapacity
 
