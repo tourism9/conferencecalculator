@@ -1,27 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Button } from 'react-bootstrap';
 
-function App() {
+import Routes from './Routes';
+import history from './history';
+
+
+function App(){
+  const buttonStyle={
+   
+    
+    marginLeft:"1%",
+    padding:"2%",
+   
+    
+    
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    
+      <div className="App" >
+         <Routes />
+         {//we can add image to the button later. 
+         }
+         
+         <Button style={buttonStyle} variant="secondary"onClick={() => history.push('/') } >Map</Button>
+         
+         <Button style={buttonStyle} variant="secondary"onClick={() => history.push('/Calculator')}>Calculator</Button>
+         
+         <Button style={buttonStyle} variant="secondary" onClick={() => history.push('/Rooms')}>Rooms</Button>
+         <Button style={buttonStyle} variant="secondary" onClick={() => history.push('/Account')}>Account</Button>
+         
+      </div>
 
+    );
+}
 export default App;
-//test commit from Kati
