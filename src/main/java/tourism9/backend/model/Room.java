@@ -12,15 +12,22 @@ public class Room {
     private String name;
     private double length;
     private double width;
+    private int ogOccupancy;
+    private int numEntered;
+    private int numExited;
 
     public Room(@JsonProperty("id") UUID id,
                 @JsonProperty("name") String name,
                 @JsonProperty("length") double length,
-                @JsonProperty("width") double width) {
+                @JsonProperty("width") double width,
+                @JsonProperty("ogOccupancy") int ogOccupancy) {
         this.id = id;
         this.name = name;
         this.length = length;
         this.width = width;
+        this.ogOccupancy = ogOccupancy;
+        this.numEntered = 0;
+        this.numExited = 0;
     }
 
     public UUID getId() {
@@ -53,5 +60,29 @@ public class Room {
 
     public void setWidth(double width) {
         this.width = width;
+    }
+
+    public int getOgOccupancy() {
+        return ogOccupancy;
+    }
+
+    public void setOgOccupancy(int ogOccupancy) {
+        this.ogOccupancy = ogOccupancy;
+    }
+
+    public int getNumEntered() {
+        return numEntered;
+    }
+
+    public void setNumEntered(int numEntered) {
+        this.numEntered = numEntered;
+    }
+
+    public int getNumExited() {
+        return numExited;
+    }
+
+    public void setNumExited(int numExited) {
+        this.numExited = numExited;
     }
 }
