@@ -1,4 +1,4 @@
-package tourism9.backend.model;
+package main.java.tourism9.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

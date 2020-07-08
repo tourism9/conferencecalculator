@@ -1,6 +1,6 @@
-package tourism9.backend.dao;
+package main.java.tourism9.backend.dao;
 
-import tourism9.backend.model.Room;
+import main.java.tourism9.backend.model.Room;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,7 +1,7 @@
-package tourism9.backend.dao;
+package main.java.tourism9.backend.dao;
 
 import org.springframework.stereotype.Repository;
-import tourism9.backend.model.User;
+import main.java.tourism9.backend.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class FakeUserDataAccessService implements UserDao {
     @Override
     public int deleteUserByID(UUID id) {
         Optional<User> user = selectUserByID(id);
-        if (user.isEmpty()) {
+        if (!user.isPresent()) {
             return 0;
         }
 

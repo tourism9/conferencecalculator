@@ -1,11 +1,11 @@
-package tourism9.backend.service;
+package main.java.tourism9.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-import tourism9.backend.dao.RoomDao;
-import tourism9.backend.model.Room;
+import main.java.tourism9.backend.dao.RoomDao;
+import main.java.tourism9.backend.model.Room;
 
 import java.util.List;
 import java.util.Optional;

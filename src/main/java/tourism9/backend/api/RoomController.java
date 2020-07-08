@@ -1,12 +1,12 @@
-package tourism9.backend.api;
+package main.java.tourism9.backend.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import tourism9.backend.model.Room;
-import tourism9.backend.service.RoomService;
-import tourism9.backend.service.UserService;
+import main.java.tourism9.backend.model.Room;
+import main.java.tourism9.backend.service.RoomService;
+import main.java.tourism9.backend.service.UserService;
 
 import javax.validation.Valid;
 import java.util.List;

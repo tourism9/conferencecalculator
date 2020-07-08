@@ -1,8 +1,8 @@
-package tourism9.backend.dao;
+package main.java.tourism9.backend.dao;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
-import tourism9.backend.model.Room;
+import main.java.tourism9.backend.model.Room;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +34,7 @@ public class FakeRoomDataAccessService implements RoomDao {
     @Override
     public int deleteRoomByID(UUID id) {
         Optional<Room> room = selectRoomByID(id);
-        if (room.isEmpty()) {
+        if (!room.isPresent()) {
             return 0;
         }
 
