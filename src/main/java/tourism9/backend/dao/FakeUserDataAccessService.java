@@ -1,7 +1,7 @@
-package main.java.tourism9.backend.dao;
+package tourism9.backend.dao;
 
 import org.springframework.stereotype.Repository;
-import main.java.tourism9.backend.model.User;
+import tourism9.backend.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

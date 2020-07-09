@@ -1,11 +1,11 @@
-package main.java.tourism9.backend.service;
+package tourism9.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-import main.java.tourism9.backend.dao.UserDao;
-import main.java.tourism9.backend.model.User;
+import tourism9.backend.dao.UserDao;
+import tourism9.backend.model.User;
 
 import javax.swing.text.html.Option;
 import java.util.List;
@@ -18,7 +18,7 @@ public class UserService {
     private final UserDao userDao;
 
     @Autowired
-    public UserService(@Qualifier("fakeUserDao") UserDao userDao) {
+    public UserService(@Qualifier("postgres") UserDao userDao) {
         this.userDao = userDao;
     }
 

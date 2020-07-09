@@ -1,4 +1,4 @@
-package main.java.tourism9.backend.datasource;
+package tourism9.backend.datasource;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import com.zaxxer.hikari.HikariDataSource;

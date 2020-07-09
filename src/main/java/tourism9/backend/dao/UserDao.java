@@ -1,6 +1,6 @@
-package main.java.tourism9.backend.dao;
+package tourism9.backend.dao;
 
-import main.java.tourism9.backend.model.User;
+import tourism9.backend.model.User;
 
 import java.util.List;
 import java.util.Optional;
