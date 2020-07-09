@@ -7,30 +7,26 @@ import history from './history';
 
 
 function App(){
-  const buttonStyle={
-   
-    
+  const buttonStyle={ 
     marginLeft:"1%",
     padding:"2%",
-   
-    
-    
   }
 
   return (
     
       <div className="App" >
          <Routes />
-         {//we can add image to the button later. 
+         {//These are navigation buttons. We can add image to the button later. 
          }
          
+         <div className="navButton">
          <Button style={buttonStyle} variant="secondary"onClick={() => history.push('/') } >Map</Button>
          
-         <Button style={buttonStyle} variant="secondary"onClick={() => history.push('/Calculator')}>Calculator</Button>
-         
-         <Button style={buttonStyle} variant="secondary" onClick={() => history.push('/Rooms')}>Rooms</Button>
+         <Button  style={buttonStyle} variant="secondary"onClick={() => history.push('/Calculator')}>Calculator</Button>
+        
+         <Button   style={buttonStyle} variant="secondary" onClick={() => history.push('/Rooms')}>Rooms</Button>
          <Button style={buttonStyle} variant="secondary" onClick={() => history.push('/Account')}>Account</Button>
-         
+         </div>
       </div>
 
     );

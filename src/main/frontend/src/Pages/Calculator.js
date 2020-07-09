@@ -1,90 +1,131 @@
 import React from 'react';
-import Table from "./../Components/Table";
 
-import { Form, Label, Modal, Button } from 'react-bootstrap';
+import './../App.css';
+import { Form, Col, FormGroup,Label, Modal, Button } from 'react-bootstrap';
+
 function Calculator() {
-    //create a bool in state called modalshow to toggle.                                                 
-    const [show, setShow] = React.useState(false);
+    
     const [newRoomData, setNewRoomData]=React.useState({
       name:"",
       width:0,
       length:0,
-      //need to change to calculation
-      maxCapacity:10
+      minDistance:1,
+      maxCapacity:0
 
     })
-    // temporary data for now. Need to retrieve information from database using GET with API
-    const [rooms,setRoomData]=React.useState([{name:"Ballroom1", width:500, length:300, maxCapacity:10}]) 
-    //*************************************************************************** */
 
-    const handleOpen=()=>setShow(true);
-    const handleClose=()=>setShow(false);
     const addNewRoom=()=>{
       //Need to do a post request to store room info to the server
-      setShow(false);
-      rooms.push(newRoomData);
-      //console.log(rooms);
+      //rooms.push(newRoomData);
+     
+     fetch('http://localhost:8080/api/v1/room',{
+       method:'POST',
+       headers:{'Content-type': 'application/json'},
+       credentials: "same-origin", 
+       mode: "cors",
+       cache: "no-cache", 
+      body:JSON.stringify(newRoomData)
+      }).then(r=>r.json()).then(res=>{
+        if(res){
+            console.log("post successful")
+        }else{
+          console.log("error")
+          throw new Error('Something went wrong ...');
+        }
+      })
+     
       //reset
       setNewRoomData({
         name:"",
         width:0,
         length:0,
-        maxCapacity:0
+        minDistance:1,
+        maxCapacity:0,
+        currentCapacity:0
       })
 
     }
 
+//important function that calculates maxmimum capacity of a room. 
+    const changeNewRoomData=(newName, newWidth, newHeight,newMinDistance )=>{
+      //change this formula to calculate maximum Capacity
+      const newMaxCapacity=Math.round((newWidth*newHeight)/newMinDistance);
+      setNewRoomData({
+        name:newName,
+       width:newWidth,
+        length:newHeight,
+        minDistance:newMinDistance,
+         maxCapacity:newMaxCapacity
+       })
+    }
 
 
+    const deleteRoom=()=>{
+      //do a delete request using the API
+
+    }
 
   return (
-    <div className="Calculator">
-     
-      <Button color="primary" style={{  float:"left", marginLeft:"10%"}}  onClick={handleOpen}>Add Room</Button>
-      {//this is the pop up that shows when button is clicked
-      }
-      <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>
-      <Modal.Title>Add a new room</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-    {
-      //the inputs in the pop up window. 
-      }
+    <div className="Calculator"
+    >
+     <h1 style={{"textAlign": "center"}}> Please Enter the Following
+     </h1>
+      
+    <Form className="calculatorForm">
+      <Col>
+      <Form.Group >
+        <Form.Label >Room Name</Form.Label>
+        <Form.Control  defaultValue={newRoomData.name}  onChange={(e) =>changeNewRoomData(
+           e.target.value,
+           newRoomData.width,
+            newRoomData.length,
+            newRoomData.minDistance
+         )}/>
+      </Form.Group>
+      </Col>
+
+    <Col>
     <Form.Group >
-      <Form.Label >Room Name</Form.Label>
-      <Form.Control placeholder="Room name" onChange={(e) =>setNewRoomData({
-        name:e.target.value,
-       width:newRoomData.width,
-        length:newRoomData.length,
-         maxCapacity:newRoomData.maxCapacity
-    })}/>
-    <Form.Label>Width</Form.Label>
-    <Form.Control type="number"  onChange={(e) =>setNewRoomData({
-      name:newRoomData.name,
-      width:e.target.value,
-      length:newRoomData.length,
-       maxCapacity:newRoomData.maxCapacity
-    })}/>
-    <Form.Label>Length</Form.Label>
-    <Form.Control type="number" onChange={(e) =>setNewRoomData({
-      name:newRoomData.name,
-      width:e.target.value,
-      length:e.target.value,
-      maxCapacity:newRoomData.maxCapacity
-     })}/>
-  </Form.Group>
-  </Modal.Body>
-  <Modal.Footer>
-      <Button variant="secondary" onClick={handleClose}>
-       Close
-      </Button>
-     <Button variant="primary" onClick={addNewRoom}>
-        Save Changes
-      </Button>
-    </Modal.Footer>
-  </Modal>
-  <Table roomsToRender={rooms}/>
+     <Form.Label>Width</Form.Label>
+      <Form.Control type="number" defaultValue={newRoomData.width}  onChange={(e) =>changeNewRoomData( newRoomData.name, e.target.value,
+         newRoomData.length,
+        newRoomData.minDistance)}/>
+    </Form.Group>
+    <Form.Group >
+      <Form.Label>Length</Form.Label>
+      <Form.Control type="number" defaultValue={newRoomData.length}  onChange={(e) =>changeNewRoomData(
+        newRoomData.name,
+       newRoomData.width,
+       e.target.value,
+        newRoomData.minDistance
+     )}/>
+     </Form.Group>
+     </Col>
+
+     <Col>
+     <Form.Group>
+      <Form.Label>Min Distance between each person required by CDC Guidelines:</Form.Label>
+      <Form.Control type="number" defaultValue={newRoomData.minDistance} onChange={(e) =>changeNewRoomData(
+         newRoomData.name,
+         newRoomData.width,
+         newRoomData.length,
+          e.target.value
+
+      )}/>    
+
+      </Form.Group>
+      </Col>
+
+      <div> <strong id="maxCapacity">Maximum Capacity: {newRoomData.maxCapacity}</strong></div>
+     
+      <Button variant="primary" className="btn-lg btn-block"  type="submit" onClick={addNewRoom}>
+       Add to Layout       
+       </Button>
+  
+   
+    </Form>
+  
+  
           
   </div>
         );

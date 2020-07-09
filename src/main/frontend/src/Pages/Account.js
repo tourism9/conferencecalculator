@@ -9,8 +9,6 @@ class Account extends Component {
           <div className="Accounr">
 
               <h1>Account page</h1>
-              
-           
           </div>
         );
       }
