@@ -1,6 +1,6 @@
 app:
   datasource:
-    jdbc-url: jdbc:postgresql://localhost:5432/tourism_postgres_db
+    jdbc-url: jdbc:postgresql://localhost:5432/tourism9_db
     username: postgres
     password: password
     pool-size: 30

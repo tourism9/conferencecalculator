@@ -1,4 +1,4 @@
-package main.java.tourism9.backend;
+package tourism9.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
