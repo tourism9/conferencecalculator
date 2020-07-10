@@ -11,7 +11,7 @@ import tourism9.backend.service.UserService;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("api/v1/room")
 @RestController
 public class RoomController {
