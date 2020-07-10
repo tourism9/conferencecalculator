@@ -10,7 +10,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository("realUserDao")
-public class UserDataAccessService implements UserDao{
+public class UserDataAccessService implements UserDao {
 
     private final JdbcTemplate jdbcTemplate;
 
