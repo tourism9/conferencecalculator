@@ -24,7 +24,7 @@ class Table extends Component {
     const renderRoom=(room, index)=>{
      console.log("I work")
      return ( 
-      <div className="cover" >
+      <div className="cover" key={index}>
       <Accordion  open= "false" defaultActiveKey="0" >
      <Card  >
      <Accordion.Toggle as={Card.Header} eventKey={index} style={{"backgroundColor":"green", "color": "black", "height":"80px", "fontWeight": "bold", "fontSize":"30px"}} >
@@ -46,7 +46,7 @@ class Table extends Component {
     
     const rooms=this.state.roomsToRender.map(renderRoom)
     return (
-      <div class="room">
+      <div className="room">
         {rooms}
       </div>
     )
