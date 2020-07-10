@@ -17,8 +17,8 @@ function Calculator() {
     const addNewRoom=()=>{
       //Need to do a post request to store room info to the server
       //rooms.push(newRoomData);
-     
-     fetch('http://localhost:8080/api/v1/room',{
+     //use 'http://localhost:8080/api/v1/room' when testing on local web browser. 
+     fetch( 'http://localhost:8080/api/v1/room',{
        method:'POST',
        headers:{'Content-type': 'application/json'},
        credentials: "same-origin", 
@@ -59,11 +59,6 @@ function Calculator() {
        })
     }
 
-
-    const deleteRoom=()=>{
-      //do a delete request using the API
-
-    }
 
   return (
     <div className="Calculator"
