@@ -34,7 +34,7 @@ public class FakeRoomDataAccessService implements RoomDao {
     @Override
     public int deleteRoomByID(UUID id) {
         Optional<Room> room = selectRoomByID(id);
-        if (room.isEmpty()) {
+        if (!room.isPresent()) {
             return 0;
         }
 

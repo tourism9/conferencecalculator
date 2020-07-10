@@ -34,7 +34,7 @@ public class FakeUserDataAccessService implements UserDao {
     @Override
     public int deleteUserByID(UUID id) {
         Optional<User> user = selectUserByID(id);
-        if (user.isEmpty()) {
+        if (!user.isPresent()) {
             return 0;
         }
 
