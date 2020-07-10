@@ -17,7 +17,7 @@ function Calculator() {
     const addNewRoom=()=>{
       //Need to do a post request to store room info to the server
       //rooms.push(newRoomData);
-     
+     //use 'http://localhost:8080/api/v1/room' when testing on local web browser. 
      fetch('https://conferencecalculator.herokuapp.com/api/v1/room',{
        method:'POST',
        headers:{'Content-type': 'application/json'},
