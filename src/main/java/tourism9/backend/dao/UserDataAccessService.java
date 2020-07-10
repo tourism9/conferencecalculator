@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository("postgres")
+@Repository("realUserDao")
 public class UserDataAccessService implements UserDao{
 
     private final JdbcTemplate jdbcTemplate;
@@ -21,12 +21,14 @@ public class UserDataAccessService implements UserDao{
 
     @Override
     public int insertUser(UUID id, User user) {
+        String sql = "INSERT INTO Users (id, username, password) VALUES (?, ?, ?);";
+        jdbcTemplate.update(sql, id, user.getUsername(), user.getPassword());
         return 0;
     }
 
     @Override
     public List<User> selectAllUsers() {
-        final String sql = "SELECT id, username, password FROM Users";
+        String sql = "SELECT id, username, password FROM Users;";
         return jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID id = UUID.fromString(resultSet.getString("id"));
             String username = resultSet.getString("username");
@@ -37,7 +39,7 @@ public class UserDataAccessService implements UserDao{
 
     @Override
     public Optional<User> selectUserByID(UUID id) {
-        final String sql = "SELECT id, username, password FROM Users WHERE id = ?";
+        String sql = "SELECT id, username, password FROM Users WHERE id = ?;";
         User user = jdbcTemplate.queryForObject(sql, new Object[]{id},
                 (resultSet, i) -> {
                     UUID userId = UUID.fromString(resultSet.getString("id"));
@@ -50,11 +52,15 @@ public class UserDataAccessService implements UserDao{
 
     @Override
     public int deleteUserByID(UUID id) {
+        String sql = "DELETE FROM Users WHERE id = ?;";
+        jdbcTemplate.update(sql, id);
         return 0;
     }
 
     @Override
     public int updateUserByID(UUID id, User user) {
+        String sql = "UPDATE Users SET username=?, password=? WHERE id=?;";
+        jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), id);
         return 0;
     }
 }

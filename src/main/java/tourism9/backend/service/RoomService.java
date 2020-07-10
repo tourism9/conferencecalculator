@@ -17,7 +17,7 @@ public class RoomService {
     private final RoomDao roomDao;
 
     @Autowired
-    public RoomService(@Qualifier("fakeRoomDao") RoomDao roomDao) {
+    public RoomService(@Qualifier("realRoomDao") RoomDao roomDao) {
         this.roomDao = roomDao;
     }
 
