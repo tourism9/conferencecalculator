@@ -27,10 +27,10 @@ class Table extends Component {
       <div className="cover" key={index}>
       <Accordion  open= "false" defaultActiveKey="0" >
      <Card  >
-     <Accordion.Toggle as={Card.Header} eventKey={index} style={{"backgroundColor":"green", "color": "black", "height":"80px", "fontWeight": "bold", "fontSize":"30px"}} >
+     <Accordion.Toggle as={Card.Header} eventKey="1" style={{"backgroundColor":"green", "color": "black", "height":"80px", "fontWeight": "bold", "fontSize":"30px"}} >
       {room.name}
     </Accordion.Toggle>
-    <Accordion.Collapse eventKey={index}>
+    <Accordion.Collapse eventKey="1">
 
       {
         //need to read data live to update current capacity. 
