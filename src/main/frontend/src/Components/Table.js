@@ -33,15 +33,13 @@ class Table extends Component {
      console.log("I am doing"+room.name)
      return ( 
       <div className="cover" key={index}>
-      <Accordion  defaultActiveKey="0" >
-     <Card>
-
+      <Accordion  open= "false" defaultActiveKey="0" >
+     <Card  >
      <Accordion.Toggle as={Card.Header} eventKey="1" style={{"backgroundColor":"green", "color": "black", "height":"80px", "fontWeight": "bold", "fontSize":"30px"}} >
       {room.name}
      
 
     </Accordion.Toggle>
-    
     <Accordion.Collapse eventKey="1">
 
       {
