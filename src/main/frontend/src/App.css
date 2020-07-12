@@ -18,7 +18,7 @@
   width:100%;
   max-width:50%;
   margin: auto;
-  margin-bottom:100px;
+  
  
 }
 
@@ -26,8 +26,12 @@
   height: 100%;
   width: 100%;
   margin-bottom:3%;
- 
-  
+
   text-align: center;
+}
+
+
+.roomInfo{
+  font-size:20px;
 }
 
