@@ -12,15 +12,20 @@ public class Room {
     private String name;
     private double length;
     private double width;
+    private int maxCapacity;
+    private int currentCapacity;
 
     public Room(@JsonProperty("id") UUID id,
                 @JsonProperty("name") String name,
                 @JsonProperty("length") double length,
-                @JsonProperty("width") double width) {
+                @JsonProperty("width") double width,
+                @JsonProperty("maxCapacity") int maxCapacity) {
         this.id = id;
         this.name = name;
         this.length = length;
         this.width = width;
+        this.maxCapacity = maxCapacity;
+        this.currentCapacity = 0;
     }
 
     public UUID getId() {
@@ -53,5 +58,21 @@ public class Room {
 
     public void setWidth(double width) {
         this.width = width;
+    }
+
+    public int getMaxCapacity() {
+        return maxCapacity;
+    }
+
+    public void setMaxCapacity(int maxCapacity) {
+        this.maxCapacity = maxCapacity;
+    }
+
+    public int getCurrentCapacity() {
+        return currentCapacity;
+    }
+
+    public void setCurrentCapacity(int currentCapacity) {
+        this.currentCapacity = currentCapacity;
     }
 }
