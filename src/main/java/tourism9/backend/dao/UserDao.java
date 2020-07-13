@@ -2,7 +2,6 @@ package tourism9.backend.dao;
 
 import tourism9.backend.model.User;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
