@@ -115,7 +115,7 @@ function Calculator() {
 
       <div> <strong id="maxCapacity">Maximum Capacity: {newRoomData.maxCapacity}</strong></div>
      
-      <Button variant="primary" className="btn-lg btn-block"  type="submit" onClick={addNewRoom}>
+      <Button variant="primary" className="btn-lg btn-block" onClick={addNewRoom}>
        Add to Layout       
        </Button>
   
