@@ -28,7 +28,7 @@ class Rooms extends Component {
     }
 
     deleteRoom(id){
-      fetch( 'http://localhost:8080/api/v1/room/'+id,{
+      fetch( 'https://conferencecalculator.herokuapp.com/api/v1/room/'+id,{
         method:'Delete'
        }).then(()=>
 
