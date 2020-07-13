@@ -18,9 +18,9 @@ class Rooms extends Component {
       this.refreshRoom()
     }
 
-   async refreshRoom(){
+  refreshRoom(){
       console.log("WORKS");
-      await fetch('https://conferencecalculator.herokuapp.com/api/v1/room',{signal: this.abortController.signal})
+      fetch('https://conferencecalculator.herokuapp.com/api/v1/room',{signal: this.abortController.signal})
       .then(res=>res.json()).then(
       result=>{
        this.setState({rooms:result})
