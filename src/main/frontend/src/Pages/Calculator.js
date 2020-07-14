@@ -89,7 +89,7 @@ function Calculator() {
         <Dropdown.Menu>
           <Dropdown.Item href="#/action-1"  onClick={(e)=>setUnit(e.target.text)}>Feet</Dropdown.Item>
           <Dropdown.Item href="#/action-2" onClick={(e)=>setUnit(e.target.text)}>Inches</Dropdown.Item>
-           <Dropdown.Item href="#/action-3" onClick={(e)=>setUnit(e.target.text)}>Meter</Dropdown.Item>
+           <Dropdown.Item href="#/action-3" onClick={(e)=>setUnit(e.target.text)}>Meters</Dropdown.Item>
         </Dropdown.Menu>
        </Dropdown>
       </div>
