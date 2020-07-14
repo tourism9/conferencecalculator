@@ -1,5 +1,6 @@
 .navButton {
   text-align: center;
+  margin-top: 1%;
 }
 
 .calculatorForm{
@@ -12,6 +13,7 @@
 
 #maxCapacity{
   font-size:40px;
+
 }
 
 .room{

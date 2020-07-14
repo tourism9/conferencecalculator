@@ -1,7 +1,8 @@
 import React from 'react';
 
 import './../App.css';
-import { Form, Col, FormGroup,Label, Modal, Button } from 'react-bootstrap';
+import './styles.css';
+import { Form, Col, FormGroup, Button, Dropdown } from 'react-bootstrap';
 
 function Calculator() {
     
@@ -10,9 +11,12 @@ function Calculator() {
       width:0,
       length:0,
       minDistance:1,
-      maxCapacity:0
-
+      maxCapacity:0,
+      currentCapacity:0
     })
+
+
+    const [unit, setUnit]=React.useState("Feet")
 
     
 
@@ -67,11 +71,29 @@ function Calculator() {
     >
      <h1 style={{"textAlign": "center"}}> Please Enter the Following
      </h1>
-      
+    
+
+
     <Form className="calculatorForm">
-      <Col>
+      <div>
+     
+       <Dropdown>
+       <Form.Label className="label" style={{"marginRight":"5%", "marginBottom":"2%"}}>Current Unit:</Form.Label>
+        <Dropdown.Toggle variant="success" id="dropdown-basic" className="btn-lg"  style={{"fontSize":"20px"}}>
+            {unit}
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item href="#/action-1"  onClick={(e)=>setUnit(e.target.text)}>Feet</Dropdown.Item>
+          <Dropdown.Item href="#/action-2" onClick={(e)=>setUnit(e.target.text)}>Inches</Dropdown.Item>
+           <Dropdown.Item href="#/action-3" onClick={(e)=>setUnit(e.target.text)}>Meter</Dropdown.Item>
+        </Dropdown.Menu>
+       </Dropdown>
+      </div>
+
+     
       <Form.Group >
-        <Form.Label >Room Name</Form.Label>
+        <Form.Label className="label">Room Name</Form.Label>
         <Form.Control  defaultValue={newRoomData.name}  onChange={(e) =>changeNewRoomData(
            e.target.value,
            newRoomData.width,
@@ -79,17 +101,17 @@ function Calculator() {
             newRoomData.minDistance
          )}/>
       </Form.Group>
-      </Col>
+      
 
-    <Col>
+    
     <Form.Group >
-     <Form.Label>Width</Form.Label>
+        <Form.Label className="label">Width in {unit.toLowerCase()}</Form.Label>
       <Form.Control type="number" defaultValue={newRoomData.width}  onChange={(e) =>changeNewRoomData( newRoomData.name, e.target.value,
          newRoomData.length,
         newRoomData.minDistance)}/>
     </Form.Group>
     <Form.Group >
-      <Form.Label>Length</Form.Label>
+      <Form.Label className="label">Length in {unit.toLowerCase()}</Form.Label>
       <Form.Control type="number" defaultValue={newRoomData.length}  onChange={(e) =>changeNewRoomData(
         newRoomData.name,
        newRoomData.width,
@@ -97,11 +119,11 @@ function Calculator() {
         newRoomData.minDistance
      )}/>
      </Form.Group>
-     </Col>
+     
 
-     <Col>
+     
      <Form.Group>
-      <Form.Label>Min Distance between each person required by CDC Guidelines:</Form.Label>
+      <Form.Label className="label">Minimum Distance between each person required by CDC Guidelines in {unit.toLowerCase()}:</Form.Label>
       <Form.Control type="number" defaultValue={newRoomData.minDistance} onChange={(e) =>changeNewRoomData(
          newRoomData.name,
          newRoomData.width,
@@ -111,15 +133,14 @@ function Calculator() {
       )}/>    
 
       </Form.Group>
-      </Col>
+     
 
       <div> <strong id="maxCapacity">Maximum Capacity: {newRoomData.maxCapacity}</strong></div>
      
-      <Button variant="primary" className="btn-lg btn-block" onClick={addNewRoom}>
+      <Button variant="primary" className="btn-lg btn-block" style={{ "marginTop":"2%"}} onClick={addNewRoom}>
        Add to Layout       
        </Button>
-  
-   
+
     </Form>
   
   

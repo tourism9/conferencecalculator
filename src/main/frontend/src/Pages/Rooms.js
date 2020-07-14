@@ -4,7 +4,8 @@ import Table from "./../Components/Table";
 
 class Rooms extends Component {
     state={
-      rooms:[]
+      rooms:[],
+      isFetching:true
     }
 
 
@@ -24,6 +25,7 @@ class Rooms extends Component {
       .then(res=>res.json()).then(
       result=>{
        this.setState({rooms:result})
+       this.setState({isFetching:false})
       })
     }
 
@@ -35,10 +37,6 @@ class Rooms extends Component {
         //refresh rooms array after deleting
        this.refreshRoom()
        )
-         
-        
-
-        
 
     }
 
@@ -48,7 +46,10 @@ class Rooms extends Component {
       this.abortController.abort()
     }
 
-   
+    componentDidUpdate() {
+        console.log("updated");
+    }
+
    
     render() {
 
@@ -59,8 +60,8 @@ class Rooms extends Component {
                                      //table component will call both delete and refresh. 
                                        }
 
-           <h1 style={{ "textAlign": "center"}}>Start the backend server and add room using the calculator</h1>
-          <Table roomsToRender={this.state.rooms} deleteRoom={this.deleteRoom.bind(this)} refreshRoom={this.refreshRoom.bind(this)}/>
+           <h1 style={{ "textAlign": "center"}}></h1>
+          <Table roomsToRender={this.state.rooms} isFetching={this.state.isFetching} deleteRoom={this.deleteRoom.bind(this)} refreshRoom={this.refreshRoom.bind(this)}/>
             </div>
          
         );
