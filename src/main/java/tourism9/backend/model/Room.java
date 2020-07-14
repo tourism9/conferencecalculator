@@ -14,18 +14,21 @@ public class Room {
     private double width;
     private int maxCapacity;
     private int currentCapacity;
+    private String units;
 
     public Room(@JsonProperty("id") UUID id,
                 @JsonProperty("name") String name,
                 @JsonProperty("length") double length,
                 @JsonProperty("width") double width,
-                @JsonProperty("maxCapacity") int maxCapacity) {
+                @JsonProperty("maxCapacity") int maxCapacity,
+                @JsonProperty("units") String units) {
         this.id = id;
         this.name = name;
         this.length = length;
         this.width = width;
         this.maxCapacity = maxCapacity;
         this.currentCapacity = 0;
+        this.units = units;
     }
 
     public UUID getId() {
@@ -74,5 +77,13 @@ public class Room {
 
     public void setCurrentCapacity(int currentCapacity) {
         this.currentCapacity = currentCapacity;
+    }
+
+    public String getUnits() {
+        return this.units;
+    }
+
+    public void setUnits(String units) {
+        this.units = units;
     }
 }
