@@ -4,5 +4,5 @@ CREATE TABLE IF NOT EXISTS Rooms (
     length DECIMAL NOT NULL,
     width DECIMAL NOT NULL,
     maxCapacity INTEGER NOT NULL,
-    units VARCHAR(100) NOT NULL
+    units VARCHAR(100)
 );
