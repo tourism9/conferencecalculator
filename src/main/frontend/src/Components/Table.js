@@ -45,7 +45,7 @@ class Table extends Component {
       {
         //need to read data live to update current capacity. 
       }
-     <Card.Body className="roomInfo"> Current Capacity: 0/{room.maxCapacity} <br/> Width: {room.width} <br/> Length: {room.length}<br/>
+     <Card.Body className="roomInfo"> Current Capacity: 0/{room.maxCapacity} <br/> Width: {room.width} {room.units} <br/> Length: {room.length} {room.units}<br/>
      <Button variant="danger" onClick={this.deleteAndRefresh.bind(this, room.id)} style={{"float":"right", "marginBottom":"3%"}}>delete</Button>
     </Card.Body>
     </Accordion.Collapse>

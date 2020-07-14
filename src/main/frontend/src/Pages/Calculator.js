@@ -5,18 +5,19 @@ import './styles.css';
 import { Form, Col, FormGroup, Button, Dropdown } from 'react-bootstrap';
 
 function Calculator() {
-    
+  const [unit, setUnit]=React.useState("Feet")
     const [newRoomData, setNewRoomData]=React.useState({
       name:"",
       width:0,
       length:0,
       minDistance:1,
       maxCapacity:0,
-      currentCapacity:0
+      currentCapacity:0,
+      units:unit
     })
 
 
-    const [unit, setUnit]=React.useState("Feet")
+   
 
     
 
@@ -47,7 +48,8 @@ function Calculator() {
         length:0,
         minDistance:1,
         maxCapacity:0,
-        currentCapacity:0
+        currentCapacity:0,
+        units:unit
       })
 
     }
@@ -61,7 +63,8 @@ function Calculator() {
        width:newWidth,
         length:newHeight,
         minDistance:newMinDistance,
-         maxCapacity:newMaxCapacity
+         maxCapacity:newMaxCapacity,
+         units:unit
        })
     }
 
