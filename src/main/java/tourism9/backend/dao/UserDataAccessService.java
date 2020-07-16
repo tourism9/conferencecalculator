@@ -21,31 +21,38 @@ public class UserDataAccessService implements UserDao {
 
     @Override
     public int insertUser(UUID id, User user) {
-        String sql = "INSERT INTO Users (id, username, password) VALUES (?, ?, ?);";
-        jdbcTemplate.update(sql, id, user.getUsername(), user.getPassword());
+        String sql = "INSERT INTO Users (id, firstName, lastName, username, password, editingRights) VALUES (?, ?, ?, ?, ?, ?);";
+        jdbcTemplate.update(sql, id, user.getFirstName(), user.getLastName(), user.getUsername(),
+                        user.getPassword(), user.getEditingRights());
         return 0;
     }
 
     @Override
     public List<User> selectAllUsers() {
-        String sql = "SELECT id, username, password FROM Users;";
+        String sql = "SELECT * FROM Users;";
         return jdbcTemplate.query(sql, (resultSet, i) -> {
             UUID id = UUID.fromString(resultSet.getString("id"));
+            String firstName = resultSet.getString("firstName");
+            String lastName = resultSet.getString("lastName");
             String username = resultSet.getString("username");
             String password = resultSet.getString("password");
-            return new User(id, username, password);
+            boolean editingRights = resultSet.getBoolean("editingRights");
+            return new User(id, firstName, lastName, username, password, editingRights);
         });
     }
 
     @Override
     public Optional<User> selectUserByID(UUID id) {
-        String sql = "SELECT id, username, password FROM Users WHERE id = ?;";
+        String sql = "SELECT * FROM Users WHERE id = ?;";
         User user = jdbcTemplate.queryForObject(sql, new Object[]{id},
                 (resultSet, i) -> {
                     UUID userId = UUID.fromString(resultSet.getString("id"));
+                    String firstName = resultSet.getString("firstName");
+                    String lastName = resultSet.getString("lastName");
                     String username = resultSet.getString("username");
                     String password = resultSet.getString("password");
-                return new User(userId, username, password);
+                    boolean editingRights = resultSet.getBoolean("editingRights");
+                return new User(userId, firstName, lastName, username, password, editingRights);
         });
         return Optional.ofNullable(user);
     }
@@ -59,8 +66,9 @@ public class UserDataAccessService implements UserDao {
 
     @Override
     public int updateUserByID(UUID id, User user) {
-        String sql = "UPDATE Users SET username=?, password=? WHERE id=?;";
-        jdbcTemplate.update(sql, user.getUsername(), user.getPassword(), id);
+        String sql = "UPDATE Users SET firstName=?, lastName=?, username=?, password=?, editingRights=? WHERE id=?;";
+        jdbcTemplate.update(sql, user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(),
+                        user.getEditingRights(), id);
         return 0;
     }
 }
