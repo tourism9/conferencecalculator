@@ -49,12 +49,11 @@ public class LogDataAccessService implements LogDao{
         String sql = "SELECT * FROM Logs WHERE logID = ?;";
         Log log = jdbcTemplate.queryForObject(sql, new Object[]{id},
                 (resultSet, i) -> {
-                    UUID logID = UUID.fromString(resultSet.getString("logID"));
                     UUID userID = UUID.fromString(resultSet.getString("userID"));
                     UUID roomID = UUID.fromString(resultSet.getString("roomID"));
                     LocalDateTime dateAndTime = resultSet.getTimestamp("dateAndTime").toLocalDateTime();
                     String state = resultSet.getString("state");
-                    return new Log(logID, userID, roomID, dateAndTime, state);
+                    return new Log(id, userID, roomID, dateAndTime, state);
                 });
         return Optional.ofNullable(log);
     }
@@ -65,11 +64,10 @@ public class LogDataAccessService implements LogDao{
         return jdbcTemplate.query(sql, new Object[]{id},
                 (resultSet, i) -> {
                     UUID logID = UUID.fromString(resultSet.getString("logID"));
-                    UUID userID = UUID.fromString(resultSet.getString("userID"));
                     UUID roomID = UUID.fromString(resultSet.getString("roomID"));
                     LocalDateTime dateAndTime = resultSet.getTimestamp("dateAndTime").toLocalDateTime();
                     String state = resultSet.getString("state");
-                    return new Log(logID, userID, roomID, dateAndTime, state);
+                    return new Log(logID, id, roomID, dateAndTime, state);
                 });
     }
 
@@ -80,10 +78,9 @@ public class LogDataAccessService implements LogDao{
                 (resultSet, i) -> {
                     UUID logID = UUID.fromString(resultSet.getString("logID"));
                     UUID userID = UUID.fromString(resultSet.getString("userID"));
-                    UUID roomID = UUID.fromString(resultSet.getString("roomID"));
                     LocalDateTime dateAndTime = resultSet.getTimestamp("dateAndTime").toLocalDateTime();
                     String state = resultSet.getString("state");
-                    return new Log(logID, userID, roomID, dateAndTime, state);
+                    return new Log(logID, userID, id, dateAndTime, state);
                 });
     }
 

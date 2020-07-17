@@ -46,13 +46,12 @@ public class UserDataAccessService implements UserDao {
         String sql = "SELECT * FROM Users WHERE id = ?;";
         User user = jdbcTemplate.queryForObject(sql, new Object[]{id},
                 (resultSet, i) -> {
-                    UUID userId = UUID.fromString(resultSet.getString("id"));
                     String firstName = resultSet.getString("firstName");
                     String lastName = resultSet.getString("lastName");
                     String username = resultSet.getString("username");
                     String password = resultSet.getString("password");
                     boolean editingRights = resultSet.getBoolean("editingRights");
-                return new User(userId, firstName, lastName, username, password, editingRights);
+                return new User(id, firstName, lastName, username, password, editingRights);
         });
         return Optional.ofNullable(user);
     }
