@@ -14,7 +14,7 @@ class Map extends Component {
         return (
           <div className="Map">
 
-              <h1>Home page</h1>
+              <h1>Map Here</h1>
               <form>
                
               </form>
