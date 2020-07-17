@@ -15,13 +15,17 @@ public class Room {
     private int maxCapacity;
     private int currentCapacity;
     private String units;
+    private int numberEntered;
+    private int numberExited;
 
     public Room(@JsonProperty("id") UUID id,
                 @JsonProperty("name") String name,
                 @JsonProperty("length") double length,
                 @JsonProperty("width") double width,
                 @JsonProperty("maxCapacity") int maxCapacity,
-                @JsonProperty("units") String units) {
+                @JsonProperty("units") String units,
+                @JsonProperty("numberEntered") int numberEntered,
+                @JsonProperty("numberExited") int numberExited) {
         this.id = id;
         this.name = name;
         this.length = length;
@@ -29,6 +33,8 @@ public class Room {
         this.maxCapacity = maxCapacity;
         this.currentCapacity = 0;
         this.units = units;
+        this.numberEntered = numberEntered;
+        this.numberExited = numberExited;
     }
 
     public UUID getId() {
@@ -85,5 +91,21 @@ public class Room {
 
     public void setUnits(String units) {
         this.units = units;
+    }
+
+    public int getNumberEntered() {
+        return numberEntered;
+    }
+
+    public void setNumberEntered(int numberEntered) {
+        this.numberEntered = numberEntered;
+    }
+
+    public int getNumberExited() {
+        return numberExited;
+    }
+
+    public void setNumberExited(int numberExited) {
+        this.numberExited = numberExited;
     }
 }
