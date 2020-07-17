@@ -6,6 +6,7 @@ import Rooms from "./Pages/Rooms";
 import Calculator from "./Pages/Calculator";
 import Map from "./Pages/Map";
 import Account from "./Pages/Account";
+import Home from "./Pages/Home";
 import history from './history';
 
 export default class Routes extends Component {
@@ -19,7 +20,8 @@ export default class Routes extends Component {
                     {
                         //link components to the url. 
                     }
-                    <Route path="/" exact component={Map} />
+                    <Route path="/" exact component={Home} />
+                    <Route path="/Map" exact component={Map} />
                     <Route path="/Rooms" component={Rooms} />
                     <Route path="/Calculator" component={Calculator} />
                     <Route path="/account" component={Account} />
