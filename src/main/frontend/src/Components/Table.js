@@ -12,7 +12,8 @@ class Table extends Component {
 
   
   state={
-    roomsToRender:this.props.roomsToRender
+    roomsToRender:this.props.roomsToRender,
+    users:this.props.users
   }
 
   deleteAndRefresh(id){
@@ -20,22 +21,68 @@ class Table extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    this.setState({ roomsToRender: nextProps.roomsToRender});  
+    this.setState({ roomsToRender: nextProps.roomsToRender,users:nextProps.users });  
   }
 
-  
+  /*
+  simulateRandomUser(){
+    var timer = setInterval(() => {  
+        
+      let range= this.state.roomsToRender.length
+      let index= Math.floor(Math.random() * Math.floor(range));
+      let random=Math.floor(Math.random() * (2 -(-2)  +1))-2
+    if(this.state.roomsToRender.length!=0){
+      if(this.state.roomsToRender[index].currentCapacity<=0&&random<0){
+          random=random*-1;
+      }else if(this.state.roomsToRender[index].currentCapacity>=this.state.roomsToRender[index].maxCapacity&&random>0){
+        random=random*-1;
+      }
+
+      
+      
+        this.setState(prevState => ({
+          roomsToRender: prevState.roomsToRender.map(
+          (obj, i) => ( index=== i ? Object.assign(obj, {currentCapacity:obj.currentCapacity+random }) : obj)
+          )
+          }));
+
+      }
+      }, 1000)
+    
+         this.setState({timer: timer});
+    }
+
+*/
+    
+
+
+  componentDidMount() {
+
+     
+  }
+
+   //unsubscribe when unmounted
+   componentWillUnmount(){
+    clearInterval(this.state.timer);
+
+  }
 
 
 
   render(){
 
     const renderRoom=(room, index)=>{
-     console.log("I am doing"+room.name)
+     //change color according to currentCapacity divided by max capacity
      return ( 
       <div className="cover" key={index}>
       <Accordion  defaultActiveKey="0" >
-     <Card >
-     <Accordion.Toggle as={Card.Header} eventKey="1" style={{"backgroundColor":"green", "color": "black", "height":"80px", "fontWeight": "bold", "fontSize":"30px"}} >
+     <Card >       
+     <Accordion.Toggle as={Card.Header} eventKey="1" style={{"backgroundColor":
+     this.state.roomsToRender[index].currentCapacity/this.state.roomsToRender[index].maxCapacity<0.50?"green":
+     this.state.roomsToRender[index].currentCapacity/this.state.roomsToRender[index].maxCapacity<=0.85? "orange":
+     "red",
+     
+     "color": "black", "height":"80px", "fontWeight": "bold", "fontSize":"30px"}} >
       {room.name}
      
 
@@ -45,7 +92,7 @@ class Table extends Component {
       {
         //need to read data live to update current capacity. 
       }
-     <Card.Body className="roomInfo"> Current Capacity: 0/{room.maxCapacity} <br/> Width: {room.width} {room.units} <br/> Length: {room.length} {room.units}<br/>
+     <Card.Body className="roomInfo"> Current Capacity: {room.currentCapacity}/{room.maxCapacity} <br/> Width: {room.width} {room.units} <br/> Length: {room.length} {room.units}<br/>
      <Button variant="danger" onClick={this.deleteAndRefresh.bind(this, room.id)} style={{"float":"right", "marginBottom":"3%"}}>delete</Button>
     </Card.Body>
     </Accordion.Collapse>

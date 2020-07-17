@@ -23,8 +23,7 @@ function Calculator() {
 
     const addNewRoom=()=>{
       
-    
-     //use 'http://localhost:8080/api/v1/room' when testing on local web browser. 
+  
      fetch( 'https://conferencecalculator.herokuapp.com/api/v1/room',{
        method:'POST',
        headers:{'Content-type': 'application/json'},
@@ -57,7 +56,7 @@ function Calculator() {
 //important function that calculates maxmimum capacity of a room. 
     const changeNewRoomData=(newName, newWidth, newHeight,newMinDistance )=>{
       //change this formula to calculate maximum Capacity
-      const newMaxCapacity=Math.floor((newWidth*newHeight)/(2*newMinDistance*2*newMinDistance))
+      const newMaxCapacity=Math.floor((newWidth*newHeight)/(newMinDistance*newMinDistance))
       setNewRoomData({
         name:newName,
        width:newWidth,
