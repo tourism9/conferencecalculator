@@ -28,6 +28,8 @@ class Table extends Component {
 
 
   render(){
+      const isBackgroundGreen = false; //is capacity < 80%
+      const isBackgroundYellow = false; //is capacity between 80% and 100%
 
     const renderRoom=(room, index)=>{
      console.log("I am doing"+room.name)
@@ -35,7 +37,7 @@ class Table extends Component {
       <div className="cover" key={index}>
       <Accordion  defaultActiveKey="0" >
      <Card >
-     <Accordion.Toggle as={Card.Header} eventKey="1" style={{"backgroundColor":"green", "color": "black", "height":"80px", "fontWeight": "bold", "fontSize":"30px"}} >
+     <Accordion.Toggle as={Card.Header} eventKey="1" style={{"backgroundColor":isBackgroundGreen ? 'green' : isBackgroundYellow ? 'yellow' : 'red', "color": "black", "height":"80px", "fontWeight": "bold", "fontSize":"30px"}} >
       {room.name}
      
 
@@ -45,7 +47,7 @@ class Table extends Component {
       {
         //need to read data live to update current capacity. 
       }
-     <Card.Body className="roomInfo"> Current Capacity: 0/{room.maxCapacity} <br/> Width: {room.width} {room.units} <br/> Length: {room.length} {room.units}<br/>
+     <Card.Body className="roomInfo"> Current Capacity: {room.currentCapacity}/{room.maxCapacity} <br/> Width: {room.width} {room.units} <br/> Length: {room.length} {room.units}<br/>
      <Button variant="danger" onClick={this.deleteAndRefresh.bind(this, room.id)} style={{"float":"right", "marginBottom":"3%"}}>delete</Button>
     </Card.Body>
     </Accordion.Collapse>
