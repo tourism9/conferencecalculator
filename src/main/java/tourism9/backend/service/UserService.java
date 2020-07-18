@@ -15,9 +15,6 @@ import java.util.UUID;
 
 @Service("userService")
 public class UserService {
-
-    @Qualifier("realUserDao")
-    @Autowired
     private final UserDao userDao;
 
     @Autowired
