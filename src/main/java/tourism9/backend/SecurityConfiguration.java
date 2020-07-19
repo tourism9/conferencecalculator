@@ -6,26 +6,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import tourism9.backend.service.UserService;
+import tourism9.backend.service.MyUserDetailsService;
 
-import javax.annotation.Resource;
-
+@EnableWebSecurity
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return super.userDetailsService();
-    }
+    private MyUserDetailsService myUserDetailsService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -35,7 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setUserDetailsService(myUserDetailsService);
         return authProvider;
     }
 
@@ -46,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(myUserDetailsService);
         auth.jdbcAuthentication();
     }
 }
