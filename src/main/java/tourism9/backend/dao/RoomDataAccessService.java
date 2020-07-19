@@ -24,7 +24,7 @@ public class RoomDataAccessService implements RoomDao {
         String sql = "INSERT INTO Rooms (id, name, length, width, maxCapacity, units, numberEntered, numberExited) " +
                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         jdbcTemplate.update(sql, id, room.getName(), room.getLength(), room.getWidth(), room.getMaxCapacity(), room.getUnits(),
-                        room.getNumberEntered(), room.getNumberExited());
+                        0, 0);
         return 1;
     }
 

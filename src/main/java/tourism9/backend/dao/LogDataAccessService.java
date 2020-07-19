@@ -4,13 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import tourism9.backend.model.Log;
-import tourism9.backend.model.User;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -26,8 +22,8 @@ public class LogDataAccessService implements LogDao{
 
     @Override
     public int insertLog(UUID id, Log log) {
-        String sql = "INSERT INTO Logs (logID, userID, roomID, dateAndTime, state) VALUES (?, ?, ?, ?, ?);";
-        jdbcTemplate.update(sql, id, log.getLogID(), log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getState());
+        String sql = "INSERT INTO Logs (logID, userID, roomID, dateAndTime, enterOrExit) VALUES (?, ?, ?, ?, ?);";
+        jdbcTemplate.update(sql, id, log.getLogID(), log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getEnterOrExit());
         return 0;
     }
 
@@ -39,8 +35,8 @@ public class LogDataAccessService implements LogDao{
             UUID userID = UUID.fromString(resultSet.getString("userID"));
             UUID roomID = UUID.fromString(resultSet.getString("roomID"));
             LocalDateTime dateAndTime = resultSet.getTimestamp("dateAndTime").toLocalDateTime();
-            String state = resultSet.getString("state");
-            return new Log(logID, userID, roomID, dateAndTime, state);
+            String enterOrExit = resultSet.getString("enterOrExit");
+            return new Log(logID, userID, roomID, dateAndTime, enterOrExit);
         });
     }
 
@@ -52,8 +48,8 @@ public class LogDataAccessService implements LogDao{
                     UUID userID = UUID.fromString(resultSet.getString("userID"));
                     UUID roomID = UUID.fromString(resultSet.getString("roomID"));
                     LocalDateTime dateAndTime = resultSet.getTimestamp("dateAndTime").toLocalDateTime();
-                    String state = resultSet.getString("state");
-                    return new Log(id, userID, roomID, dateAndTime, state);
+                    String enterOrExit = resultSet.getString("enterOrExit");
+                    return new Log(id, userID, roomID, dateAndTime, enterOrExit);
                 });
         return Optional.ofNullable(log);
     }
@@ -66,8 +62,8 @@ public class LogDataAccessService implements LogDao{
                     UUID logID = UUID.fromString(resultSet.getString("logID"));
                     UUID roomID = UUID.fromString(resultSet.getString("roomID"));
                     LocalDateTime dateAndTime = resultSet.getTimestamp("dateAndTime").toLocalDateTime();
-                    String state = resultSet.getString("state");
-                    return new Log(logID, id, roomID, dateAndTime, state);
+                    String enterOrExit = resultSet.getString("enterOrExit");
+                    return new Log(logID, id, roomID, dateAndTime, enterOrExit);
                 });
     }
 
@@ -79,8 +75,8 @@ public class LogDataAccessService implements LogDao{
                     UUID logID = UUID.fromString(resultSet.getString("logID"));
                     UUID userID = UUID.fromString(resultSet.getString("userID"));
                     LocalDateTime dateAndTime = resultSet.getTimestamp("dateAndTime").toLocalDateTime();
-                    String state = resultSet.getString("state");
-                    return new Log(logID, userID, id, dateAndTime, state);
+                    String enterOrExit = resultSet.getString("enterOrExit");
+                    return new Log(logID, userID, id, dateAndTime, enterOrExit);
                 });
     }
 
@@ -93,8 +89,8 @@ public class LogDataAccessService implements LogDao{
 
     @Override
     public int updateLogByID(UUID id, Log log) {
-        String sql = "UPDATE Logs SET userID=?, roomID=?, dateAndTime=?, state=? WHERE logID=?;";
-        jdbcTemplate.update(sql, log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getState(), id);
+        String sql = "UPDATE Logs SET userID=?, roomID=?, dateAndTime=?, enterOrExit=? WHERE logID=?;";
+        jdbcTemplate.update(sql, log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getEnterOrExit(), id);
         return 0;
     }
 }
