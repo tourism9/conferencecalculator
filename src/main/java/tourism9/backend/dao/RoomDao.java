@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface RoomDao {
     int insertRoom(UUID id, Room room);
 
-    default int insertRoom(Room room) {
+    default int insertRoom(Room room) { // POST Method
         UUID id = UUID.randomUUID();
         return insertRoom(id, room);
     }
