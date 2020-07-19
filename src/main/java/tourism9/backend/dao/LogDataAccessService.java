@@ -23,7 +23,7 @@ public class LogDataAccessService implements LogDao{
     @Override
     public int insertLog(UUID id, Log log) {
         String sql = "INSERT INTO Logs (logID, userID, roomID, dateAndTime, enterOrExit) VALUES (?, ?, ?, ?, ?);";
-        jdbcTemplate.update(sql, id, log.getLogID(), log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getEnterOrExit());
+        jdbcTemplate.update(sql, id, log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getEnterOrExit());
         return 0;
     }
 
