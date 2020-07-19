@@ -49,8 +49,7 @@ public class FakeRoomDataAccessService implements RoomDao {
                     int index = DB.indexOf(room);
                     if (index >= 0) {
                         DB.set(index,
-                                new Room(id, update.getName(),
-                                        update.getLength(), update.getWidth(),
+                                new Room(id, update.getName(), update.getLength(), update.getWidth(),
                                         update.getMaxCapacity(), update.getUnits()));
                         return 1;
                     }

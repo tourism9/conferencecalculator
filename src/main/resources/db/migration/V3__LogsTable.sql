@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS Logs (
     logID UUID NOT NULL PRIMARY KEY,
-    userID UUID NOT NULL,
+    userID UUID,
     roomID UUID NOT NULL,
     dateAndTime TIMESTAMP NOT NULL,
-    state varchar(100) NOT NULL
+    enterOrExit INTEGER NOT NULL
 );
