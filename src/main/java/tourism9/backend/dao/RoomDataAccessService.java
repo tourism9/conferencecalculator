@@ -21,8 +21,7 @@ public class RoomDataAccessService implements RoomDao {
 
     @Override
     public int insertRoom(UUID id, Room room) {
-        String sql = "INSERT INTO Rooms (id, name, length, width, maxCapacity, units, numberEntered, numberExited) " +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO Rooms (id, name, length, width, maxCapacity, units, numberEntered, numberExited) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         jdbcTemplate.update(sql, id, room.getName(), room.getLength(), room.getWidth(), room.getMaxCapacity(), room.getUnits(),
                         0, 0);
         return 1;
@@ -70,8 +69,7 @@ public class RoomDataAccessService implements RoomDao {
 
     @Override
     public int updateRoomByID(UUID id, Room room) {
-        String sql = "UPDATE Rooms SET name=?, length=?, width=?, maxCapacity=?, units=?, numberEntered=?, " +
-                        "numberExited=? WHERE id=?;";
+        String sql = "UPDATE Rooms SET name=?, length=?, width=?, maxCapacity=?, units=?, numberEntered=?, numberExited=? WHERE id=?;";
         jdbcTemplate.update(sql, room.getName(), room.getLength(), room.getWidth(), room.getMaxCapacity(), room.getUnits(),
                         room.getNumberEntered(), room.getNumberExited(), id);
         return 1;
