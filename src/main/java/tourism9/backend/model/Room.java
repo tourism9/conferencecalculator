@@ -17,6 +17,7 @@ public class Room {
     private String units;
     private int numberEntered;
     private int numberExited;
+    private String color;
 
     public Room(@JsonProperty("id") UUID id,
                 @JsonProperty("name") String name,
@@ -32,9 +33,18 @@ public class Room {
         this.width = width;
         this.maxCapacity = maxCapacity;
         this.currentCapacity = 0;
+        this.color = "green";
         this.units = units;
         this.numberEntered = numberEntered;
         this.numberExited = numberExited;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 
     public UUID getId() {
