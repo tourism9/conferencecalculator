@@ -29,6 +29,14 @@ public class LogService {
         return logDao.selectAllLogs();
     }
 
+    public List<Log> getLogsByRoomID(UUID roomID) {
+        return logDao.selectLogsByRoomID(roomID);
+    }
+
+    public List<Log> getLogsByUserID(UUID userID) {
+        return logDao.selectLogsByUserID(userID);
+    }
+
     public Optional<Log> getLogByID(UUID id) {
         return logDao.selectLogByID(id);
     }

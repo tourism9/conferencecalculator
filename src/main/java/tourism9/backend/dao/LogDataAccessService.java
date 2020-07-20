@@ -22,8 +22,16 @@ public class LogDataAccessService implements LogDao{
 
     @Override
     public int insertLog(UUID id, Log log) {
-        String sql = "INSERT INTO Logs (logID, userID, roomID, dateAndTime, enterOrExit) VALUES (?, ?, ?, ?, ?);";
-        jdbcTemplate.update(sql, id, log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getEnterOrExit());
+        List<Log> logs = selectLogsByRoomID(log.getRoomID());
+        int cap = 0;
+        if (!logs.isEmpty()) {
+            Log latestLog = logs.get(logs.size() - 1);
+            cap = latestLog.getCurrentRoomCapacity();
+        }
+
+        String sql = "INSERT INTO Logs (logID, userID, roomID, dateAndTime, enterOrExit, currentRoomCapacity) VALUES (?, ?, ?, ?, ?, ?);";
+        jdbcTemplate.update(sql, id, log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getEnterOrExit(),
+                        cap + log.getEnterOrExit());
         return 0;
     }
 
@@ -36,7 +44,8 @@ public class LogDataAccessService implements LogDao{
             UUID roomID = UUID.fromString(resultSet.getString("roomID"));
             LocalDateTime dateAndTime = resultSet.getTimestamp("dateAndTime").toLocalDateTime();
             String enterOrExit = resultSet.getString("enterOrExit");
-            return new Log(logID, userID, roomID, dateAndTime, enterOrExit);
+            int currentRoomCapacity = resultSet.getInt("currentRoomCapacity");
+            return new Log(logID, userID, roomID, dateAndTime, enterOrExit, currentRoomCapacity);
         });
     }
 
@@ -49,7 +58,8 @@ public class LogDataAccessService implements LogDao{
                     UUID roomID = UUID.fromString(resultSet.getString("roomID"));
                     LocalDateTime dateAndTime = resultSet.getTimestamp("dateAndTime").toLocalDateTime();
                     String enterOrExit = resultSet.getString("enterOrExit");
-                    return new Log(id, userID, roomID, dateAndTime, enterOrExit);
+                    int currentRoomCapacity = resultSet.getInt("currentRoomCapacity");
+                    return new Log(id, userID, roomID, dateAndTime, enterOrExit, currentRoomCapacity);
                 });
         return Optional.ofNullable(log);
     }
@@ -63,7 +73,8 @@ public class LogDataAccessService implements LogDao{
                     UUID roomID = UUID.fromString(resultSet.getString("roomID"));
                     LocalDateTime dateAndTime = resultSet.getTimestamp("dateAndTime").toLocalDateTime();
                     String enterOrExit = resultSet.getString("enterOrExit");
-                    return new Log(logID, id, roomID, dateAndTime, enterOrExit);
+                    int currentRoomCapacity = resultSet.getInt("currentRoomCapacity");
+                    return new Log(logID, id, roomID, dateAndTime, enterOrExit, currentRoomCapacity);
                 });
     }
 
@@ -76,7 +87,8 @@ public class LogDataAccessService implements LogDao{
                     UUID userID = UUID.fromString(resultSet.getString("userID"));
                     LocalDateTime dateAndTime = resultSet.getTimestamp("dateAndTime").toLocalDateTime();
                     String enterOrExit = resultSet.getString("enterOrExit");
-                    return new Log(logID, userID, id, dateAndTime, enterOrExit);
+                    int currentRoomCapacity = resultSet.getInt("currentRoomCapacity");
+                    return new Log(logID, userID, id, dateAndTime, enterOrExit, currentRoomCapacity);
                 });
     }
 
@@ -89,8 +101,9 @@ public class LogDataAccessService implements LogDao{
 
     @Override
     public int updateLogByID(UUID id, Log log) {
-        String sql = "UPDATE Logs SET userID=?, roomID=?, dateAndTime=?, enterOrExit=? WHERE logID=?;";
-        jdbcTemplate.update(sql, log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getEnterOrExit(), id);
+        String sql = "UPDATE Logs SET userID=?, roomID=?, dateAndTime=?, enterOrExit=?, currentRoomCapacity=? WHERE logID=?;";
+        jdbcTemplate.update(sql, log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getEnterOrExit(),
+                        log.getCurrentRoomCapacity(), id);
         return 0;
     }
 }

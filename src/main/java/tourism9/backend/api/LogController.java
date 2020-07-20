@@ -31,6 +31,16 @@ public class LogController {
         return logService.getAllLogs();
     }
 
+    @GetMapping(path = "{roomID}")
+    public List<Log> getLogsByRoomID(@PathVariable("roomID") UUID roomID) {
+        return logService.getLogsByRoomID(roomID);
+    }
+
+    @GetMapping(path = "{userID}")
+    public List<Log> getLogsByUserID(@PathVariable("userID") UUID userID) {
+        return logService.getLogsByUserID(userID);
+    }
+
     @GetMapping(path = "{id}")
     public Log getLogByID(@PathVariable("id") UUID id) {
         return logService.getLogByID(id)
