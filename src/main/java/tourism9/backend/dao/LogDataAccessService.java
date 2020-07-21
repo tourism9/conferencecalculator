@@ -15,12 +15,10 @@ import java.util.UUID;
 public class LogDataAccessService implements LogDao{
 
     private final JdbcTemplate jdbcTemplate;
-//    private final RoomDataAccessService roomDAO;
 
     @Autowired
-    public LogDataAccessService(JdbcTemplate jdbcTemplate/*, RoomDataAccessService roomDAO*/) {
+    public LogDataAccessService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-//        this.roomDAO = roomDAO;
     }
 
     @Override
@@ -30,15 +28,6 @@ public class LogDataAccessService implements LogDao{
         String sql = "INSERT INTO Logs (logID, userID, roomID, dateAndTime, enterOrExit, currentRoomCapacity) VALUES (?, ?, ?, ?, ?, ?);";
         jdbcTemplate.update(sql, id, log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getEnterOrExit(),
                         cap + log.getEnterOrExit());
-//        Optional<Room> optionalRoom = this.roomDAO.selectRoomByID(log.getRoomID());
-//        if (optionalRoom.isPresent()) {
-//            System.out.println("Is present");
-//            Room room = optionalRoom.get();
-//            System.out.println("Room: " + room);
-//            room.setCurrentCapacity(cap + log.getEnterOrExit());
-//            room.calculateColor();
-//            System.out.println(cap + log.getEnterOrExit());
-//        }
         return 0;
     }
 
