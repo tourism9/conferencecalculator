@@ -1,5 +1,9 @@
 package tourism9.backend.service;
 
+/**
+ * Example file, do not use
+ */
+
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
