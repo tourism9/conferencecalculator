@@ -53,6 +53,6 @@ public class UserService implements UserDetailsService {
     // This is the example one
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return new org.springframework.security.core.userdetails.User("foo", "foo", new ArrayList<>());
+        return new User(username);
     }
 }

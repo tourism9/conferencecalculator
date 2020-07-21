@@ -2,9 +2,11 @@ package tourism9.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -18,6 +20,11 @@ public class User implements UserDetails {
     @NotBlank
     private String password;
     private boolean editingRights;
+
+    public User(@JsonProperty("username") String username) {
+        this.username = username;
+        this.password = "pass";
+    }
 
     public User(@JsonProperty("id") UUID id,
                 @JsonProperty("firstName") String firstName,
@@ -55,27 +62,27 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     public String getPassword() {
