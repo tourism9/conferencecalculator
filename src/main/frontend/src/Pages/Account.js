@@ -10,8 +10,9 @@ class Account extends Component {
         return (
           <div className="Account">
 
-              <h1>Account page</h1>
-              <p><img src={qr} alt="QR Code"/></p>
+              <h1>Event Participant Information</h1>
+              <p style={{textAlign:"center", fontSize:"25px", marginTop:"2%"}}>Room Check-in/Check-out QR Code:
+                <img style={{borderStyle:"solid", marginTop:"1%"}} src={qr} alt="QR Code"/></p>
           </div>
         );
       }
