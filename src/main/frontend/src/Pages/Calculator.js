@@ -17,10 +17,6 @@ function Calculator() {
     })
 
 
-   
-
-    
-
     const addNewRoom=()=>{
       
 
@@ -28,7 +24,7 @@ function Calculator() {
      fetch( 'https://conferencecalculator.herokuapp.com/api/v1/room',{
        method:'POST',
        headers:{'Content-type': 'application/json'},
-       credentials: "same-origin", 
+      credentials: "same-origin", 
        mode: "cors",
        cache: "no-cache", 
       body:JSON.stringify(newRoomData)
@@ -41,6 +37,7 @@ function Calculator() {
         }
       })
      
+    
       //reset
       setNewRoomData({
         name:"",

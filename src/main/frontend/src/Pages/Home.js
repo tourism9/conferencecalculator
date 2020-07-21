@@ -1,14 +1,21 @@
 import React, { Component } from "react";
-import { Button } from 'react-bootstrap';
 import history from './../history';
-
+import Modal from 'react-bootstrap/Modal'
+import { Form, FormGroup, Button, Dropdown } from 'react-bootstrap';
 class Home extends Component {
+    state={
+        show:false
+    }
+  
 
-    // temporary data for now. Need to retrieve information from database using GET with API
+    handleClose(){
+        this.setState({show:false})
+    }
 
+    handleOpen(){
+        this.setState({show:true})
+    }
 
-    //*************************************************************************** */
-    // <Button variant="btn btn-success" onClick={() => history.push('/Products')}>Click button to view products</Button>
     render() {
 
         return (
@@ -16,12 +23,13 @@ class Home extends Component {
 
                 <h1>Home page</h1>
 
-                <form>
-
-                </form>
+               
                 {//<Table roomsToRender={rooms}/>
+                //<Button variant="primary" style={{"marginLeft":"auto","height":"70px"}} className="btn-lg" >Start simulation</Button>
                 }
-            </div>
+            
+            
+        </div>
         );
     }
 
