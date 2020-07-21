@@ -32,6 +32,7 @@ public class LogDataAccessService implements LogDao{
                         cap + log.getEnterOrExit());
         Optional<Room> optionalRoom = this.roomDAO.selectRoomByID(log.getRoomID());
         if (optionalRoom.isPresent()) {
+            System.out.println("Is present");
             Room room = optionalRoom.get();
             room.setCurrentCapacity(cap + log.getEnterOrExit());
             room.calculateColor();
