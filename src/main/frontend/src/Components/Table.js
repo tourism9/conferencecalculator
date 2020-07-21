@@ -7,21 +7,21 @@ import {Card } from 'react-bootstrap';
 
 class Table extends Component {
 
-  /*
+  
   state={
     roomsToRender:this.props.roomsToRender,
     
   }
-  */
+  
 
   deleteAndRefresh(id){
     this.props.deleteRoom(id)
   }
-  /*
+  
   componentWillReceiveProps(nextProps) {
     this.setState({ roomsToRender: nextProps.roomsToRender});  
   }
-*/
+
 
   render(){
       let isBackgroundGreen = false; //is capacity < 80%
@@ -66,7 +66,7 @@ class Table extends Component {
       
     }
     //iterate through the array of room and render them to the html above. 
-    const rooms=this.props.roomsToRender.map(renderRoom)
+    const rooms=this.state.roomsToRender.map(renderRoom)
 
     return (
       <div className="room">

@@ -3,18 +3,46 @@ import React, { Component } from "react";
 import Table from "./../Components/Table";
 import LogTable from "./../Components/LogTable";
 class Rooms extends Component {
-    state={
+
+
+  constructor(props) {
+    super(props);
+  
+    this.state={
       rooms:[],
       isFetching:true,
-      users:[],
       logs:[],
-      newLog:{},
-      updatedUser:{firstName:"", lastName:"", username:"",password:0}
+      roomAndUserNames:[]
     }
 
-
+    this.getSpecificUser=this.getSpecificUser.bind(this)
+    this.getSpecificRoom=this.getSpecificRoom.bind(this)
+    
+  }
     
  
+  
+  componentDidMount() {
+     this.refreshRoom();
+     this.refreshLogs();
+    
+   }
+
+ 
+    findLogRoomAndUser(){
+     
+      this.state.logs.map((log, index)=>{
+      this.getSpecificRoom(log.roomID)
+      this.getSpecificUser(log.userID)
+        if(this.state.currentRoom!=null&&this.state.currentUser!=null){
+         // console.log(this.state.currentRoom)
+          let a = this.state.roomAndUserNames.slice(); //creates the clone of the state
+          a[index] = { roomName:this.state.currentRoom.name, userName:this.state.currentUser.firstName+" "+this.state.currentUser.lastName}
+           this.setState({roomAndUserNames: a});
+        }
+      })
+      
+    }
 
 
     //allows us to unscribe to api call when switching pages. 
@@ -43,64 +71,45 @@ class Rooms extends Component {
     }
 
 
-    refreshUsers(){
-      fetch('https://conferencecalculator.herokuapp.com/api/v1/user',{signal: this.abortController.signal})
-      .then(res=>res.json()).then(
+ 
+
+
+   getSpecificUser(id){
+      
+     fetch('https://conferencecalculator.herokuapp.com/api/v1/user/'+id)
+    .then(res=>res.json()).then(
       result=>{
-        
-       this.setState({users:result})
-      // console.log(result)
+       this.setState({currentUser:result})
       })
+    
     }
+
 
     
-
-
-
-    updateUsers(id){
-      fetch( 'https://conferencecalculator.herokuapp.com/api/v1/user/'+id,{
-       method:'Put',
-       headers: {
-        'Content-Type': 'application/json',
-      },
-       credentials: "same-origin", 
-       mode: "cors",
-       cache: "no-cache", 
-         
-      body:JSON.stringify(this.state.updatedUser)
-      }).then(r=>r.json()).then(res=>{
-        if(res){
-            console.log("put successful")
-        }else{
-          console.log("error")
-          throw new Error('Something went wrong ...');
-        }
-      })
-    }
-
 
     refreshLogs(){
       fetch('https://conferencecalculator.herokuapp.com/api/v1/log',{signal: this.abortController.signal})
       .then(res=>res.json()).then(
       result=>{
        this.setState({logs:result})
+       this.findLogRoomAndUser();
       })
     }
 
    
+     getSpecificRoom(id){
+      
+      let response=  fetch('https://conferencecalculator.herokuapp.com/api/v1/room/'+id)
+      .then(res=>res.json()).then(
+       result=>{
+        this.setState({currentRoom:result})
+       })
+        
+     }
+ 
 
   
-    componentDidMount() {
-
-     // this.setState({updatedUser:{firstName:"john", lastName:"doughDough", username:"johndough",password:"12345" }})
-      this.refreshRoom()
-     this.refreshLogs()
-      this.refreshUsers()
     
-
-     
-    }
-
   
   refreshRoom(){
       //console.log("WORKS");
@@ -111,8 +120,6 @@ class Rooms extends Component {
        this.setState({isFetching:false})
       })
     }
-
-  
 
 
     deleteRoom(id){
@@ -128,8 +135,7 @@ class Rooms extends Component {
     //unsubscribe when unmounted
     componentWillUnmount(){
       this.abortController.abort()
-      clearInterval(this.state.timer);
-
+      //clearInterval(this.state.timer);
     }
 
     componentDidUpdate() {
@@ -147,8 +153,8 @@ class Rooms extends Component {
                                        }
            <h1 style={{ "textAlign": "center"}}> 
            </h1>
-          <Table roomsToRender={this.state.rooms} users={this.state.users} isFetching={this.state.isFetching} deleteRoom={this.deleteRoom.bind(this)} refreshRoom={this.refreshRoom.bind(this)} refreshUsers={this.refreshUsers.bind(this)}  updateUser={this.updateUsers.bind(this)}/>
-          <LogTable logs={this.state.logs} refreshLogs={this.refreshLogs.bind(this)}/>
+          <Table roomsToRender={this.state.rooms} users={this.state.users} isFetching={this.state.isFetching} deleteRoom={this.deleteRoom.bind(this)} refreshRoom={this.refreshRoom.bind(this)}/>
+          <LogTable logs={this.state.logs} refreshLogs={this.refreshLogs.bind(this)} findLogRoomAndUser={this.findLogRoomAndUser.bind(this)} roomAndUserNames={this.state.roomAndUserNames} />
           </div>
          
         );

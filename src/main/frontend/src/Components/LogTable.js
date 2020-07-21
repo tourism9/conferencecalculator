@@ -7,10 +7,18 @@ class LogTable extends Component {
     //const [logs, setLogs]=React.useState([])
 
     componentDidMount() {
+      var timer = setInterval(() => {  
+       this.props.refreshLogs()
+      }, 1000)
+        this.setState({timer: timer});
       
-      //console.log(logs)
-      this.props.refreshLogs()
-      
+    }
+    
+
+    componentWillUnmount(){
+    
+     clearInterval(this.state.timer);
+
     }
   
 
@@ -21,8 +29,8 @@ class LogTable extends Component {
         <Table striped bordered hover size="sm" responsive style={{ width: "50%", margin: "auto" , marginTop:"2%"}} >
         <thead>
          <tr>
-            <th>Room ID</th>
-            <th>User ID</th>
+            <th>Room Name</th>
+            <th>User Name</th>
             <th>State</th>
             <th>Time</th>
              
@@ -30,15 +38,20 @@ class LogTable extends Component {
   
         </thead>
       <tbody>
-      { this.props.logs?.map((log)=>{
+      { this.props.logs?.map((log, index)=>{
+      
+     //this.props.getRoom(log.roomID)
+       /// console.log("here: "+user)
+        //console.log("room: "+room)
+        
         return(
-        <tr key={log.id}> 
-        <td>{log.userID}</td>
-        <td>{log.roomId}</td>
+        <tr key={log.logID}> 
+          <td>{this.props.roomAndUserNames[index]==null?"Loading..":this.props.roomAndUserNames[index].roomName}</td>
+          <td>{this.props.roomAndUserNames[index]==null?"Loading..":this.props.roomAndUserNames[index].userName}</td>
         <td>{log.enterOrExit}</td>
         <td>{log.dateAndTime}</td>
         </tr>)
-  })}
+      })}
       </tbody>
       </Table>
             );
