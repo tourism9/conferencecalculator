@@ -18,7 +18,7 @@ public class LogDataAccessService implements LogDao{
 //    private final RoomDataAccessService roomDAO;
 
     @Autowired
-    public LogDataAccessService(JdbcTemplate jdbcTemplate, RoomDataAccessService roomDAO) {
+    public LogDataAccessService(JdbcTemplate jdbcTemplate/*, RoomDataAccessService roomDAO*/) {
         this.jdbcTemplate = jdbcTemplate;
 //        this.roomDAO = roomDAO;
     }
