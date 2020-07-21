@@ -38,10 +38,7 @@ public class RoomDataAccessService implements RoomDao {
             double width = resultSet.getDouble("width");
             int maxCapacity = resultSet.getInt("maxCapacity");
             String units = resultSet.getString("units");
-
-            Room room = new Room(id, name, length, width, maxCapacity, units);
-            room.setCurrentCapacity(this.logDAO.selectLatestRoomLog(id));
-            return room;
+            return new Room(id, name, length, width, maxCapacity, units);
         });
     }
 
@@ -57,9 +54,6 @@ public class RoomDataAccessService implements RoomDao {
                     String units = resultSet.getString("units");
                     return new Room(id, name, length, width, maxCapacity, units);
                 });
-        if (room != null) {
-            room.setCurrentCapacity(this.logDAO.selectLatestRoomLog(id));
-        }
         return Optional.ofNullable(room);
     }
 

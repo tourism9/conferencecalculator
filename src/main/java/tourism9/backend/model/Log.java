@@ -9,7 +9,7 @@ public class Log {
     private UUID logID;
     private UUID userID;
     private UUID roomID;
-    private String enterOrExit; //Use 1 for enter and -1 for exit
+    private int enterOrExit; //Use 1 for enter and -1 for exit
     private LocalDateTime dateAndTime;
     private int currentRoomCapacity;
 
@@ -17,7 +17,7 @@ public class Log {
                @JsonProperty("userID") UUID userID,
                @JsonProperty("roomID") UUID roomID,
                @JsonProperty("dateAndTime") LocalDateTime dateAndTime,
-               @JsonProperty("state") String enterOrExit,
+               @JsonProperty("state") int enterOrExit,
                @JsonProperty("currentRoomCapacity") int currentRoomCapacity) {
         this.logID = logID;
         this.userID = userID;
@@ -51,11 +51,11 @@ public class Log {
         this.roomID = roomID;
     }
 
-    public String getEnterOrExit() {
+    public int getEnterOrExit() {
         return enterOrExit;
     }
 
-    public void setEnterOrExit(String enterOrExit) {
+    public void setEnterOrExit(int enterOrExit) {
         this.enterOrExit = enterOrExit;
     }
 

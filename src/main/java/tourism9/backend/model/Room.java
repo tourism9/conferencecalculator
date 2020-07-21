@@ -33,6 +33,16 @@ public class Room {
         this.units = units;
     }
 
+    public void calculateColor() {
+        if ((double)this.currentCapacity / this.maxCapacity > .90) {
+            this.color = "red";
+        } else if ((double)this.currentCapacity / this.maxCapacity > 0.75) {
+            this.color = "yellow";
+        } else {
+            this.color = "green";
+        }
+    }
+
     public String getColor() {
         return color;
     }
