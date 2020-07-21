@@ -13,17 +13,18 @@ import java.util.UUID;
 public class RoomDataAccessService implements RoomDao {
 
     private final JdbcTemplate jdbcTemplate;
+    private final LogDataAccessService logDAO;
 
     @Autowired
-    public RoomDataAccessService(JdbcTemplate jdbcTemplate) {
+    public RoomDataAccessService(JdbcTemplate jdbcTemplate, LogDataAccessService logDAO) {
         this.jdbcTemplate = jdbcTemplate;
+        this.logDAO = logDAO;
     }
 
     @Override
     public int insertRoom(UUID id, Room room) {
         String sql = "INSERT INTO Rooms (id, name, length, width, maxCapacity, units) VALUES (?, ?, ?, ?, ?, ?);";
         jdbcTemplate.update(sql, id, room.getName(), room.getLength(), room.getWidth(), room.getMaxCapacity(), room.getUnits());
-
         return 1;
     }
 
@@ -37,7 +38,10 @@ public class RoomDataAccessService implements RoomDao {
             double width = resultSet.getDouble("width");
             int maxCapacity = resultSet.getInt("maxCapacity");
             String units = resultSet.getString("units");
-            return new Room(id, name, length, width, maxCapacity, units);
+
+            Room room = new Room(id, name, length, width, maxCapacity, units);
+            room.setCurrentCapacity(this.logDAO.selectLatestRoomLog(id));
+            return room;
         });
     }
 
@@ -53,6 +57,9 @@ public class RoomDataAccessService implements RoomDao {
                     String units = resultSet.getString("units");
                     return new Room(id, name, length, width, maxCapacity, units);
                 });
+        if (room != null) {
+            room.setCurrentCapacity(this.logDAO.selectLatestRoomLog(id));
+        }
         return Optional.ofNullable(room);
     }
 

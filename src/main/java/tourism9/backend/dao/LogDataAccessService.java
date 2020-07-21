@@ -22,17 +22,22 @@ public class LogDataAccessService implements LogDao{
 
     @Override
     public int insertLog(UUID id, Log log) {
-        List<Log> logs = selectLogsByRoomID(log.getRoomID());
-        int cap = 0;
-        if (!logs.isEmpty()) {
-            Log latestLog = logs.get(logs.size() - 1);
-            cap = latestLog.getCurrentRoomCapacity();
-        }
+        int cap = selectLatestRoomLog(log.getRoomID());
 
         String sql = "INSERT INTO Logs (logID, userID, roomID, dateAndTime, enterOrExit, currentRoomCapacity) VALUES (?, ?, ?, ?, ?, ?);";
         jdbcTemplate.update(sql, id, log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getEnterOrExit(),
                         cap + log.getEnterOrExit());
         return 0;
+    }
+
+    public int selectLatestRoomLog(UUID roomID) {
+        List<Log> logs = selectLogsByRoomID(roomID);
+        int cap = 0;
+        if (!logs.isEmpty()) {
+            Log latestLog = logs.get(logs.size() - 1);
+            cap = latestLog.getCurrentRoomCapacity();
+        }
+        return cap;
     }
 
     @Override
