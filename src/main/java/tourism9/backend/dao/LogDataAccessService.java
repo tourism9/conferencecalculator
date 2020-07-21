@@ -30,13 +30,15 @@ public class LogDataAccessService implements LogDao{
         String sql = "INSERT INTO Logs (logID, userID, roomID, dateAndTime, enterOrExit, currentRoomCapacity) VALUES (?, ?, ?, ?, ?, ?);";
         jdbcTemplate.update(sql, id, log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getEnterOrExit(),
                         cap + log.getEnterOrExit());
-        Optional<Room> optionalRoom = this.roomDAO.selectRoomByID(log.getRoomID());
-        if (optionalRoom.isPresent()) {
-            System.out.println("Is present");
-            Room room = optionalRoom.get();
-            room.setCurrentCapacity(cap + log.getEnterOrExit());
-            room.calculateColor();
-        }
+//        Optional<Room> optionalRoom = this.roomDAO.selectRoomByID(log.getRoomID());
+//        if (optionalRoom.isPresent()) {
+//            System.out.println("Is present");
+//            Room room = optionalRoom.get();
+//            System.out.println("Room: " + room);
+//            room.setCurrentCapacity(cap + log.getEnterOrExit());
+//            room.calculateColor();
+//            System.out.println(cap + log.getEnterOrExit());
+//        }
         return 0;
     }
 
