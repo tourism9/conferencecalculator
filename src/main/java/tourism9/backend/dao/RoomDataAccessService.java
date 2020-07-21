@@ -13,12 +13,10 @@ import java.util.UUID;
 public class RoomDataAccessService implements RoomDao {
 
     private final JdbcTemplate jdbcTemplate;
-    private final LogDataAccessService logDAO;
 
     @Autowired
-    public RoomDataAccessService(JdbcTemplate jdbcTemplate, LogDataAccessService logDAO) {
+    public RoomDataAccessService(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-        this.logDAO = logDAO;
     }
 
     @Override
