@@ -32,9 +32,9 @@ class LogTable extends Component {
       <tbody>
       { this.props.logs?.map((log)=>{
         return(
-        <tr key={log.id}> 
+        <tr key={log.logID}> 
         <td>{log.roomID}</td>
-        <td>{log.userId}</td>
+        <td>{log.userID}</td>
         <td>{log.enterOrExit}</td>
         <td>{log.dateAndTime}</td>
         </tr>)
