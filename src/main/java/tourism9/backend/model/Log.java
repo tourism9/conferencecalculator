@@ -17,7 +17,7 @@ public class Log {
                @JsonProperty("userID") UUID userID,
                @JsonProperty("roomID") UUID roomID,
                @JsonProperty("dateAndTime") LocalDateTime dateAndTime,
-               @JsonProperty("state") int enterOrExit,
+               @JsonProperty("enterOrExit") int enterOrExit,
                @JsonProperty("currentRoomCapacity") int currentRoomCapacity) {
         this.logID = logID;
         this.userID = userID;
