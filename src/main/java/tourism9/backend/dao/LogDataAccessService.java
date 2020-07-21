@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import tourism9.backend.model.Log;
+import tourism9.backend.model.Room;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,17 +15,38 @@ import java.util.UUID;
 public class LogDataAccessService implements LogDao{
 
     private final JdbcTemplate jdbcTemplate;
+    private final RoomDataAccessService roomDAO;
 
     @Autowired
-    public LogDataAccessService(JdbcTemplate jdbcTemplate) {
+    public LogDataAccessService(JdbcTemplate jdbcTemplate, RoomDataAccessService roomDAO) {
         this.jdbcTemplate = jdbcTemplate;
+        this.roomDAO = roomDAO;
     }
 
     @Override
     public int insertLog(UUID id, Log log) {
-        String sql = "INSERT INTO Logs (logID, userID, roomID, dateAndTime, enterOrExit) VALUES (?, ?, ?, ?, ?);";
-        jdbcTemplate.update(sql, id, log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getEnterOrExit());
+        int cap = selectLatestRoomLog(log.getRoomID());
+
+        String sql = "INSERT INTO Logs (logID, userID, roomID, dateAndTime, enterOrExit, currentRoomCapacity) VALUES (?, ?, ?, ?, ?, ?);";
+        jdbcTemplate.update(sql, id, log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getEnterOrExit(),
+                        cap + log.getEnterOrExit());
+        Optional<Room> optionalRoom = this.roomDAO.selectRoomByID(log.getRoomID());
+        if (optionalRoom.isPresent()) {
+            Room room = optionalRoom.get();
+            room.setCurrentCapacity(cap + log.getEnterOrExit());
+            room.calculateColor();
+        }
         return 0;
+    }
+
+    public int selectLatestRoomLog(UUID roomID) {
+        List<Log> logs = selectLogsByRoomID(roomID);
+        int cap = 0;
+        if (!logs.isEmpty()) {
+            Log latestLog = logs.get(logs.size() - 1);
+            cap = latestLog.getCurrentRoomCapacity();
+        }
+        return cap;
     }
 
     @Override
@@ -35,8 +57,9 @@ public class LogDataAccessService implements LogDao{
             UUID userID = UUID.fromString(resultSet.getString("userID"));
             UUID roomID = UUID.fromString(resultSet.getString("roomID"));
             LocalDateTime dateAndTime = resultSet.getTimestamp("dateAndTime").toLocalDateTime();
-            String enterOrExit = resultSet.getString("enterOrExit");
-            return new Log(logID, userID, roomID, dateAndTime, enterOrExit);
+            int enterOrExit = resultSet.getInt("enterOrExit");
+            int currentRoomCapacity = resultSet.getInt("currentRoomCapacity");
+            return new Log(logID, userID, roomID, dateAndTime, enterOrExit, currentRoomCapacity);
         });
     }
 
@@ -48,8 +71,9 @@ public class LogDataAccessService implements LogDao{
                     UUID userID = UUID.fromString(resultSet.getString("userID"));
                     UUID roomID = UUID.fromString(resultSet.getString("roomID"));
                     LocalDateTime dateAndTime = resultSet.getTimestamp("dateAndTime").toLocalDateTime();
-                    String enterOrExit = resultSet.getString("enterOrExit");
-                    return new Log(id, userID, roomID, dateAndTime, enterOrExit);
+                    int enterOrExit = resultSet.getInt("enterOrExit");
+                    int currentRoomCapacity = resultSet.getInt("currentRoomCapacity");
+                    return new Log(id, userID, roomID, dateAndTime, enterOrExit, currentRoomCapacity);
                 });
         return Optional.ofNullable(log);
     }
@@ -62,8 +86,9 @@ public class LogDataAccessService implements LogDao{
                     UUID logID = UUID.fromString(resultSet.getString("logID"));
                     UUID roomID = UUID.fromString(resultSet.getString("roomID"));
                     LocalDateTime dateAndTime = resultSet.getTimestamp("dateAndTime").toLocalDateTime();
-                    String enterOrExit = resultSet.getString("enterOrExit");
-                    return new Log(logID, id, roomID, dateAndTime, enterOrExit);
+                    int enterOrExit = resultSet.getInt("enterOrExit");
+                    int currentRoomCapacity = resultSet.getInt("currentRoomCapacity");
+                    return new Log(logID, id, roomID, dateAndTime, enterOrExit, currentRoomCapacity);
                 });
     }
 
@@ -75,8 +100,9 @@ public class LogDataAccessService implements LogDao{
                     UUID logID = UUID.fromString(resultSet.getString("logID"));
                     UUID userID = UUID.fromString(resultSet.getString("userID"));
                     LocalDateTime dateAndTime = resultSet.getTimestamp("dateAndTime").toLocalDateTime();
-                    String enterOrExit = resultSet.getString("enterOrExit");
-                    return new Log(logID, userID, id, dateAndTime, enterOrExit);
+                    int enterOrExit = resultSet.getInt("enterOrExit");
+                    int currentRoomCapacity = resultSet.getInt("currentRoomCapacity");
+                    return new Log(logID, userID, id, dateAndTime, enterOrExit, currentRoomCapacity);
                 });
     }
 
@@ -89,8 +115,9 @@ public class LogDataAccessService implements LogDao{
 
     @Override
     public int updateLogByID(UUID id, Log log) {
-        String sql = "UPDATE Logs SET userID=?, roomID=?, dateAndTime=?, enterOrExit=? WHERE logID=?;";
-        jdbcTemplate.update(sql, log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getEnterOrExit(), id);
+        String sql = "UPDATE Logs SET userID=?, roomID=?, dateAndTime=?, enterOrExit=?, currentRoomCapacity=? WHERE logID=?;";
+        jdbcTemplate.update(sql, log.getUserID(), log.getRoomID(), log.getDateAndTime(), log.getEnterOrExit(),
+                        log.getCurrentRoomCapacity(), id);
         return 0;
     }
 }

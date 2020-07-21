@@ -15,8 +15,7 @@ public class FakeRoomDataAccessService implements RoomDao {
 
     @Override
     public int insertRoom(UUID id, Room room) {
-        DB.add(new Room(id, room.getName(), room.getLength(), room.getWidth(), room.getMaxCapacity(), room.getUnits(),
-                room.getNumberEntered(), room.getNumberExited()));
+        DB.add(new Room(id, room.getName(), room.getLength(), room.getWidth(), room.getMaxCapacity(), room.getUnits()));
         return 1;
     }
 
@@ -51,8 +50,7 @@ public class FakeRoomDataAccessService implements RoomDao {
                     if (index >= 0) {
                         DB.set(index,
                                 new Room(id, update.getName(), update.getLength(), update.getWidth(),
-                                        update.getMaxCapacity(), update.getUnits(), update.getNumberEntered(),
-                                        update.getNumberExited()));
+                                        update.getMaxCapacity(), update.getUnits()));
                         return 1;
                     }
 

@@ -13,8 +13,6 @@ function Calculator() {
       minDistance:1,
       maxCapacity:0,
       currentCapacity:0,
-      numberEntered:0,
-      numberExited:0,
       units:unit
     })
 
@@ -48,8 +46,6 @@ function Calculator() {
         minDistance:1,
         maxCapacity:0,
         currentCapacity:0,
-        numberEntered:0,
-        numberExited:0,
         units:unit
       })
 
@@ -65,8 +61,6 @@ function Calculator() {
         length:newHeight,
         minDistance:newMinDistance,
          maxCapacity:newMaxCapacity,
-         numberEntered:0,
-         numberExited:0,
          units:unit
        })
     }
