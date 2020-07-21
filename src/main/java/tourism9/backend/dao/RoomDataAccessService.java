@@ -3,6 +3,7 @@ package tourism9.backend.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import tourism9.backend.model.Log;
 import tourism9.backend.model.Room;
 
 import java.util.List;
@@ -13,10 +14,12 @@ import java.util.UUID;
 public class RoomDataAccessService implements RoomDao {
 
     private final JdbcTemplate jdbcTemplate;
+    private final LogDataAccessService logDAO;
 
     @Autowired
-    public RoomDataAccessService(JdbcTemplate jdbcTemplate) {
+    public RoomDataAccessService(JdbcTemplate jdbcTemplate, LogDataAccessService logDAO) {
         this.jdbcTemplate = jdbcTemplate;
+        this.logDAO = logDAO;
     }
 
     @Override
@@ -36,7 +39,11 @@ public class RoomDataAccessService implements RoomDao {
             double width = resultSet.getDouble("width");
             int maxCapacity = resultSet.getInt("maxCapacity");
             String units = resultSet.getString("units");
-            return new Room(id, name, length, width, maxCapacity, units);
+
+            Room room = new Room(id, name, length, width, maxCapacity, units);
+            room.setCurrentCapacity(this.logDAO.selectLatestRoomLog(id));
+            room.calculateColor();
+            return room;
         });
     }
 
@@ -52,6 +59,10 @@ public class RoomDataAccessService implements RoomDao {
                     String units = resultSet.getString("units");
                     return new Room(id, name, length, width, maxCapacity, units);
                 });
+        if (room != null) {
+            room.setCurrentCapacity(this.logDAO.selectLatestRoomLog(id));
+            room.calculateColor();
+        }
         return Optional.ofNullable(room);
     }
 

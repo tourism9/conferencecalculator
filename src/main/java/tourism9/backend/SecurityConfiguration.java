@@ -1,6 +1,7 @@
 package tourism9.backend;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -23,14 +25,25 @@ import java.util.Arrays;
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    @Qualifier("userService")
     @Autowired
-    private MyUserDetailsService myUserDetailsService;
+    private UserDetailsService userDetailsService;
+
+    @Override
+    @Autowired
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
+        auth.jdbcAuthentication();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable();
-        http.authorizeRequests().antMatchers("/").permitAll().and().formLogin();
-
+        http.authorizeRequests()
+                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/user").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/").hasAnyRole("ADMIN", "USER")
+                .and().formLogin();
     }
 
     @Bean
@@ -48,7 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     DaoAuthenticationProvider authProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(myUserDetailsService);
+        authProvider.setUserDetailsService(userDetailsService);
         return authProvider;
     }
 
@@ -60,13 +73,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder getPasswordEncoder() {
-        return new BCryptPasswordEncoder(20);
-    }
-
-    @Override
-    @Autowired
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(myUserDetailsService);
-        auth.jdbcAuthentication();
+//        return new BCryptPasswordEncoder(20);
+        return NoOpPasswordEncoder.getInstance(); // temp, does nothing
     }
 }
