@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import history from './../history';
-import Modal from 'react-bootstrap/Modal'
-import {  Card,Button, Container } from 'react-bootstrap';
+
+import './../App.css';
+import {  Card,Button, Container, Carousel} from 'react-bootstrap';
 import conventionCenter from './conventionCenter.jpg';
 class Home extends Component {
     state={
-        show:false
+        show:false,
+        index:0
     }
   
+    
 
     handleClose(){
         this.setState({show:false})
@@ -21,26 +23,108 @@ class Home extends Component {
 
         return (
             <div className="Home">
-            
+            <img style={{maxWidth:"68%", height:"33rem",margin:"auto", marginTop:"0.5%" }}
+                className="d-block w-100"
+                 src={conventionCenter}
+                 alt="First slide"
+                />
+                <div style={{ fontSize:"10px", color:"grey" ,marginLeft:"17%"}} >Picture of Indiana Convention Center</div>
                 
-              <Container>
-                <Card style={{ width: '100%'  ,margin:"auto", marginTop:"1%", backgroundColor:""}}>
-                
-                <Card.Img  style={{   width: "100%", height:"600px", objectFit: "cover"}} variant="top" src={conventionCenter} />
-                <div style={{ fontSize:"10px", color:"grey"}} >Picture of Indiana Convention Center</div>
-                
-                <Card.Body>
-                <Card.Title style={{fontWeight:"bold", fontSize:"30px"}} >Conference Calculator</Card.Title>
-                <Card.Text style={{ fontSize:"30px" ,marginLeft:"20px"}}>
-                    This is an App that aims to making hosting large events much safer in the time of COVID-19.
 
-                     
-                </Card.Text>
-                </Card.Body>
+        <Carousel style={{margin:"auto", maxWidth:"68%" , marginTop:"0.5%"}}>
+        
+         <Carousel.Item>
+                
+                
+        
+        < Card style={{ width: '100%'  ,margin:"auto", backgroundColor:"#c89666"}}>            
+        <Card.Body>
+                                                                {
+                                                                    //insert app name here
+                                                                }
+        <Card.Title style={{fontWeight:"bold", fontSize:"20px"}} >[Insert App Name Here]</Card.Title>
+        <Card.Text style={{ fontSize:"15px" ,marginLeft:"20px"}}>
+            This is an App that aims to make hosting large events much safer in the time of COVID-19.
+          
+        </Card.Text>
+        </Card.Body>
+        </Card>  
+        </Carousel.Item>
+                                                            
+        <Carousel.Item>
+           
+        < Card style={{ width: '100%'  ,margin:"auto",maxWidth:"100%", backgroundColor:"#c89666"}}>            
+        <Card.Body>
+                                                                {
+                                                                    //insert app name here
+                                                                }
+        <Card.Title style={{fontWeight:"bold", fontSize:"20px"}} >Caculator</Card.Title>
+        <Card.Text style={{ fontSize:"15px" ,marginLeft:"20px"}}>
+                 This page is a caculator that will calculate the new maximum capacity for a room required by CDC social distancing guidelines.
+                After caculating, the room can be added to the rooms page to be tracked.
+        </Card.Text>
+        </Card.Body>
+        </Card>  
 
-                </Card>
-            </Container>
-      
+        </Carousel.Item>
+
+        <Carousel.Item>
+           
+        < Card style={{ width: '100%'  ,margin:"auto",maxWidth:"100%", backgroundColor:"#c89666"}}>            
+        <Card.Body>
+                                                              
+        <Card.Title style={{fontWeight:"bold", fontSize:"20px"}} >Rooms</Card.Title>
+        <Card.Text style={{ fontSize:"15px" ,marginLeft:"20px"}}>
+             This page tracks the current capacity of rooms. The room will change color based on the percentage 
+                of its current capacity out of its max capacity.
+ 
+        </Card.Text>
+        </Card.Body>
+        </Card>  
+
+        </Carousel.Item>
+
+        
+
+       
+        <Carousel.Item>
+           
+        < Card style={{ width: '100%'  ,margin:"auto",maxWidth:"100%", backgroundColor:"#c89666"}}>            
+        <Card.Body>
+                                                                {
+                                                                    //insert app name here
+                                                                }
+        <Card.Title style={{fontWeight:"bold", fontSize:"20px"}} >Account</Card.Title>
+        <Card.Text style={{ fontSize:"15px" ,marginLeft:"20px"}}>
+            This is example page where the attendees could access their QR code and scan on a RFID scanner to register themselves
+            entering a room or exiting a room during an event. 
+        </Card.Text>
+        </Card.Body>
+        </Card>  
+
+        </Carousel.Item>
+
+        <Carousel.Item>
+           
+        < Card style={{ width: '100%'  ,margin:"auto",maxWidth:"100%", backgroundColor:"#c89666"}}>            
+        <Card.Body>
+                                                              
+        <Card.Title style={{fontWeight:"bold", fontSize:"20px"}} >Map</Card.Title>
+        <Card.Text style={{ fontSize:"15px" ,marginLeft:"20px"}}>
+             This page is is a work in progress.
+ 
+        </Card.Text>
+        </Card.Body>
+        </Card>  
+
+        </Carousel.Item>
+
+
+                                                            
+        </Carousel>
+
+              
+          
         </div>
         );
     }

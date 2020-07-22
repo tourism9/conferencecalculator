@@ -46,8 +46,13 @@ class LogTable extends Component {
         
         return(
         <tr key={log.logID}> 
+
           <td>{this.props.roomAndUserNames[index]==null?"Loading..":this.props.roomAndUserNames[index].roomName}</td>
           <td>{this.props.roomAndUserNames[index]==null?"Loading..":this.props.roomAndUserNames[index].userName}</td>
+
+        <td>{log.roomID}</td>
+        <td>{log.userID}</td>
+
         <td>{log.enterOrExit}</td>
         <td>{log.dateAndTime}</td>
         </tr>)

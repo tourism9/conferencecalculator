@@ -146,7 +146,7 @@ class Rooms extends Component {
                                       {
                                      //table component will call both delete and refresh. 
                                        }
-           <h1 style={{ "textAlign": "center"}}> 
+           <h1 style={{ "textAlign": "center"}}> Click the Rooms for more information
            </h1>
           <Table roomsToRender={this.state.rooms} users={this.state.users} isFetching={this.state.isFetching} deleteRoom={this.deleteRoom.bind(this)} />
           

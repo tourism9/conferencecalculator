@@ -10,7 +10,7 @@ class Map extends Component {
         return (
           <div className="Map">
 
-              <h1>Map Here</h1>
+              <h1>Interactive Map Coming Soon</h1>
              
          
         
