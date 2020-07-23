@@ -186,10 +186,17 @@
 				<artifactId>heroku-maven-plugin</artifactId>
 				<version>3.0.2</version>
 			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>13</source>
+                    <target>13</target>
+                </configuration>
+            </plugin>
 
 
-
-		</plugins>
+        </plugins>
 
 	</build>
 

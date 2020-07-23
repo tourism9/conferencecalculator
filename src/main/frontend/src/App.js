@@ -7,8 +7,7 @@ import history from './history';
 
 
 function App(){
-  const buttonStyle={ 
-  
+  const buttonStyle={
     
   }
   /*
@@ -38,7 +37,7 @@ function App(){
       <div className="App" >
      
       <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="/">Conference Calculator</Navbar.Brand>
+        <Navbar.Brand href="/">EventAndPrevent</Navbar.Brand>
         
         <Nav className="mr-auto">
         <Container expand="lg">
