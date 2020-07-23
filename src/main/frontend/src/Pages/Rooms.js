@@ -127,7 +127,7 @@ class Rooms extends Component {
 
     }
 
-    //unsubscribe when unmounted
+    //unsubscribe when unmounted and clear interval 
     componentWillUnmount(){
       this.abortController.abort()
       clearInterval(this.state.timer);
