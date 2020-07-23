@@ -3,9 +3,21 @@ h1 {
     padding-top: 20px;
 }
 
-img {
+h2 {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.qr {
     height: 200px;
     width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.floor {
+    height: 500px;
     margin-left: auto;
     margin-right: auto;
     display: block;

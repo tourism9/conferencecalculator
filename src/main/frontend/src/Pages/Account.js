@@ -12,7 +12,7 @@ class Account extends Component {
 
               <h1>Event Participant Information</h1>
               <p style={{textAlign:"center", fontSize:"25px", marginTop:"2%"}}>Room Check-in/Check-out QR Code:
-                <img style={{borderStyle:"solid", marginTop:"1%"}} src={qr} alt="QR Code"/></p>
+                <img className={'qr'} style={{borderStyle:"solid", marginTop:"1%"}} src={qr} alt="QR Code"/></p>
           </div>
         );
       }

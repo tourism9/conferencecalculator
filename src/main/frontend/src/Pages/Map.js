@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Button } from 'react-bootstrap';
-import history from './../history';
+import floorOne from './floorOne.png';
+import floorTwo from './floorTwo.png';
 
 class Map extends Component {
 
@@ -11,7 +11,14 @@ class Map extends Component {
           <div className="Map">
 
               <h1>Interactive Map Coming Soon</h1>
-             
+
+              <h2>Floor One</h2>
+
+              <img className={'floor'} src={floorOne} />
+
+              <h2> Floor Two</h2>
+
+              <img className={'floor'} src={floorTwo} />
          
         
           </div>

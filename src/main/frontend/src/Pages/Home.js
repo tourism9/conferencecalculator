@@ -42,9 +42,9 @@ class Home extends Component {
                                                                 {
                                                                     //insert app name here
                                                                 }
-        <Card.Title style={{fontWeight:"bold", fontSize:"20px"}} >[Insert App Name Here]</Card.Title>
+        <Card.Title style={{fontWeight:"bold", fontSize:"20px"}} >EventAndPrevent</Card.Title>
         <Card.Text style={{ fontSize:"15px" ,marginLeft:"20px"}}>
-            This is an App that aims to make hosting large events much safer in the time of COVID-19.
+            This app aims to make hosting large events much safer in the time of COVID-19.
           
         </Card.Text>
         </Card.Body>
