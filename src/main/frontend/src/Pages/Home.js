@@ -58,10 +58,10 @@ class Home extends Component {
                                                                 {
                                                                     //insert app name here
                                                                 }
-        <Card.Title style={{fontWeight:"bold", fontSize:"20px"}} >Caculator</Card.Title>
+        <Card.Title style={{fontWeight:"bold", fontSize:"20px"}} >Calculator</Card.Title>
         <Card.Text style={{ fontSize:"15px" ,marginLeft:"20px"}}>
-                 This page is a caculator that will calculate the new maximum capacity for a room required by CDC social distancing guidelines.
-                After caculating, the room can be added to the rooms page to be tracked.
+                 This page is a calculator that will calculate the new maximum capacity for a room required by CDC social distancing guidelines.
+                After calculating, the room can be added to the rooms page to be tracked.
         </Card.Text>
         </Card.Body>
         </Card>  
@@ -96,8 +96,8 @@ class Home extends Component {
                                                                 }
         <Card.Title style={{fontWeight:"bold", fontSize:"20px"}} >Account</Card.Title>
         <Card.Text style={{ fontSize:"15px" ,marginLeft:"20px"}}>
-            This is example page where the attendees could access their QR code and scan on a RFID scanner to register themselves
-            entering a room or exiting a room during an event. 
+            This is an example page where the attendees could access their QR code and scan on a RFID scanner to register themselves
+            entering or exiting a room during an event.
         </Card.Text>
         </Card.Body>
         </Card>  
