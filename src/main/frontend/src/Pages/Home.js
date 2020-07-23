@@ -42,9 +42,9 @@ class Home extends Component {
                                                                 {
                                                                     //insert app name here
                                                                 }
-        <Card.Title style={{fontWeight:"bold", fontSize:"20px"}} >EventAndPrevent</Card.Title>
+        <Card.Title style={{fontWeight:"bold", fontSize:"20px"}} >[Insert App Name Here]</Card.Title>
         <Card.Text style={{ fontSize:"15px" ,marginLeft:"20px"}}>
-            This app aims to make hosting large events much safer in the time of COVID-19.
+            This is an App that aims to make hosting large events much safer in the time of COVID-19.
           
         </Card.Text>
         </Card.Body>
@@ -55,9 +55,7 @@ class Home extends Component {
            
         < Card style={{ width: '100%'  ,margin:"auto",maxWidth:"100%", backgroundColor:"#c89666"}}>            
         <Card.Body>
-                                                                {
-                                                                    //insert app name here
-                                                                }
+                                                               
         <Card.Title style={{fontWeight:"bold", fontSize:"20px"}} >Calculator</Card.Title>
         <Card.Text style={{ fontSize:"15px" ,marginLeft:"20px"}}>
                  This page is a calculator that will calculate the new maximum capacity for a room required by CDC social distancing guidelines.
@@ -91,9 +89,7 @@ class Home extends Component {
            
         < Card style={{ width: '100%'  ,margin:"auto",maxWidth:"100%", backgroundColor:"#c89666"}}>            
         <Card.Body>
-                                                                {
-                                                                    //insert app name here
-                                                                }
+                                                               
         <Card.Title style={{fontWeight:"bold", fontSize:"20px"}} >Account</Card.Title>
         <Card.Text style={{ fontSize:"15px" ,marginLeft:"20px"}}>
             This is an example page where the attendees could access their QR code and scan on a RFID scanner to register themselves
@@ -101,26 +97,20 @@ class Home extends Component {
         </Card.Text>
         </Card.Body>
         </Card>  
-
         </Carousel.Item>
-
         <Carousel.Item>
-           
-        < Card style={{ width: '100%'  ,margin:"auto",maxWidth:"100%", backgroundColor:"#c89666"}}>            
+        <Card style={{ width: '100%'  ,margin:"auto",maxWidth:"100%", backgroundColor:"#c89666"}}>            
         <Card.Body>
                                                               
         <Card.Title style={{fontWeight:"bold", fontSize:"20px"}} >Map</Card.Title>
         <Card.Text style={{ fontSize:"15px" ,marginLeft:"20px"}}>
-             This page is is a work in progress.
+             This page is a work in progress.
  
         </Card.Text>
         </Card.Body>
         </Card>  
 
-        </Carousel.Item>
-
-
-                                                            
+        </Carousel.Item>                                               
         </Carousel>
 
               
