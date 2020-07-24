@@ -33,6 +33,8 @@ class Rooms extends Component {
      var timer = setInterval(() => {  
       this.refreshRooms()
      }, 1000)
+     
+     this.setState({timer: timer});
    }
 
  
