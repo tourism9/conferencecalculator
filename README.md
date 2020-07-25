@@ -1,10 +1,11 @@
 # conferencecalculator
 
-Everything (frontend and backend) is located in the backend directory. We can change the name of the backend directory later for better organization.
+EventAndPrevent is an application that aims to make hosting large events much safer in the time of COVID-19. The app helps calculate the optimal amount of people allowed in one room according to CDC guidelines and keep track of current capacity levels of conference rooms.
 
-Please create a new branch for each task that you are working on and commit/push to that branch. You may approve your own pull requests.
+The Calculator page is a calculator that will calculate the new maximum capacity for a room required by CDC social distancing guidelines. After calculating, the room can be added to the rooms page to be tracked.
 
-Hex Codes for Brand Color of Indiana Convention Center:
-Blue: #173D6E
-Light Blue: #8B9EB7
-Red: #E22626
+The Rooms page tracks the current capacity of rooms. The room will change color based on the percentage of its current capacity out of its max capacity.
+
+The Account page is where the attendees could access their QR code and scan on a RFID scanner to register themselves entering or exiting a room during an event.
+
+The Map page is This page is a work in progress. In the future, the map will change colors depending on the current capacity of rooms to let attendees and staff know how safe capacity levels are, according to CDC guidelines.
