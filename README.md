@@ -1,4 +1,4 @@
-# conferencecalculator
+# EventAndPrevent
 
 EventAndPrevent is an application that aims to make hosting large events much safer in the time of COVID-19. The app helps calculate the optimal amount of people allowed in one room according to CDC guidelines and keep track of current capacity levels of conference rooms.
 
